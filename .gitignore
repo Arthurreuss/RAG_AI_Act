@@ -3,10 +3,15 @@ __pycache__/
 *$py.class
 *.so
 .Python
-
+data/
 venv/
+.venv
+pyproject.toml
+.python-version
+uv.lock
 env/
 .env
+retrieval/
 
 chroma_db/
 processed/
