@@ -1,0 +1,183 @@
+{
+  "description": "Test questions for EU AI Act RAG retrieval evaluation",
+  "version": "1.1",
+  "created": "2026-01-09",
+  "notes": "relevant_chunk_ids use partial prefix matching against citation metadata",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the definition of an AI system under the EU AI Act?",
+      "relevant_chunk_ids": ["Article 3:"],
+      "expected_keywords": ["machine-based system", "autonomy", "outputs", "predictions"],
+      "category": "definition"
+    },
+    {
+      "id": "q2", 
+      "question": "What are high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 6:", "ANNEX III:"],
+      "expected_keywords": ["high-risk", "Annex III", "safety", "fundamental rights"],
+      "category": "classification"
+    },
+    {
+      "id": "q3",
+      "question": "What AI practices are prohibited under the AI Act?",
+      "relevant_chunk_ids": ["Article 5:"],
+      "expected_keywords": ["prohibited", "subliminal", "exploitation", "social scoring"],
+      "category": "prohibition"
+    },
+    {
+      "id": "q4",
+      "question": "What are the transparency requirements for AI systems?",
+      "relevant_chunk_ids": ["Article 50:"],
+      "expected_keywords": ["transparency", "inform", "natural persons", "interaction"],
+      "category": "transparency"
+    },
+    {
+      "id": "q5",
+      "question": "What are the obligations for providers of high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 16:"],
+      "expected_keywords": ["providers", "obligations", "compliance", "quality management"],
+      "category": "obligations"
+    },
+    {
+      "id": "q6",
+      "question": "How does the AI Act define a deployer of AI systems?",
+      "relevant_chunk_ids": ["Article 3:"],
+      "expected_keywords": ["deployer", "natural person", "legal person", "professional activity"],
+      "category": "definition"
+    },
+    {
+      "id": "q7",
+      "question": "What is required for risk management of high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 9:"],
+      "expected_keywords": ["risk management", "lifecycle", "identify", "mitigate"],
+      "category": "risk_management"
+    },
+    {
+      "id": "q8",
+      "question": "What are the data governance requirements for high-risk AI?",
+      "relevant_chunk_ids": ["Article 10:"],
+      "expected_keywords": ["training data", "validation", "testing", "bias"],
+      "category": "data_governance"
+    },
+    {
+      "id": "q9",
+      "question": "What technical documentation is required for high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 11:", "ANNEX IV:"],
+      "expected_keywords": ["technical documentation", "Annex IV", "conformity assessment"],
+      "category": "documentation"
+    },
+    {
+      "id": "q10",
+      "question": "What are the record-keeping requirements for high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 12:"],
+      "expected_keywords": ["logs", "automatic recording", "traceability"],
+      "category": "record_keeping"
+    },
+    {
+      "id": "q11",
+      "question": "What human oversight is required for high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 14:"],
+      "expected_keywords": ["human oversight", "natural persons", "monitor", "intervene"],
+      "category": "human_oversight"
+    },
+    {
+      "id": "q12",
+      "question": "What accuracy and robustness requirements apply to high-risk AI?",
+      "relevant_chunk_ids": ["Article 15:"],
+      "expected_keywords": ["accuracy", "robustness", "cybersecurity", "performance"],
+      "category": "technical_requirements"
+    },
+    {
+      "id": "q13",
+      "question": "What is the conformity assessment procedure for high-risk AI?",
+      "relevant_chunk_ids": ["Article 43:", "ANNEX VI:", "ANNEX VII:"],
+      "expected_keywords": ["conformity assessment", "notified body", "CE marking"],
+      "category": "conformity"
+    },
+    {
+      "id": "q14",
+      "question": "What are the penalties for non-compliance with the AI Act?",
+      "relevant_chunk_ids": ["Article 99:"],
+      "expected_keywords": ["penalties", "fines", "administrative", "million", "turnover"],
+      "category": "penalties"
+    },
+    {
+      "id": "q15",
+      "question": "What are general-purpose AI models and what rules apply to them?",
+      "relevant_chunk_ids": ["Article 51:", "Article 52:", "Article 53:"],
+      "expected_keywords": ["general-purpose", "GPAI", "systemic risk", "foundation model"],
+      "category": "gpai"
+    },
+    {
+      "id": "q16",
+      "question": "What is the role of the AI Office under the AI Act?",
+      "relevant_chunk_ids": ["Article 64:"],
+      "expected_keywords": ["AI Office", "Commission", "enforcement", "coordination"],
+      "category": "governance"
+    },
+    {
+      "id": "q17",
+      "question": "What are the requirements for AI regulatory sandboxes?",
+      "relevant_chunk_ids": ["Article 57:", "Article 58:"],
+      "expected_keywords": ["sandbox", "testing", "controlled environment", "innovation"],
+      "category": "sandbox"
+    },
+    {
+      "id": "q18",
+      "question": "When does the AI Act enter into force and apply?",
+      "relevant_chunk_ids": ["Article 113:"],
+      "expected_keywords": ["entry into force", "application", "months", "transition"],
+      "category": "timeline"
+    },
+    {
+      "id": "q19",
+      "question": "What biometric systems are regulated under the AI Act?",
+      "relevant_chunk_ids": ["Article 5:", "ANNEX III:"],
+      "expected_keywords": ["biometric", "identification", "categorisation", "real-time"],
+      "category": "biometric"
+    },
+    {
+      "id": "q20",
+      "question": "What are the obligations of importers of high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 23:"],
+      "expected_keywords": ["importers", "conformity", "CE marking", "market"],
+      "category": "obligations"
+    },
+    {
+      "id": "q21",
+      "question": "What instructions for use must accompany high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 13:"],
+      "expected_keywords": ["instructions", "deployers", "intended purpose", "limitations"],
+      "category": "transparency"
+    },
+    {
+      "id": "q22",
+      "question": "What are the requirements for the EU database for high-risk AI systems?",
+      "relevant_chunk_ids": ["Article 71:"],
+      "expected_keywords": ["database", "registration", "publicly accessible", "information"],
+      "category": "database"
+    },
+    {
+      "id": "q23",
+      "question": "How are AI systems used in critical infrastructure classified?",
+      "relevant_chunk_ids": ["ANNEX III:", "Annex III:"],
+      "expected_keywords": ["critical infrastructure", "high-risk", "safety", "essential services"],
+      "category": "classification"
+    },
+    {
+      "id": "q24",
+      "question": "What is the right to explanation for AI decisions?",
+      "relevant_chunk_ids": ["Article 86:"],
+      "expected_keywords": ["explanation", "decision", "affected persons", "meaningful"],
+      "category": "rights"
+    },
+    {
+      "id": "q25",
+      "question": "What are the post-market monitoring requirements?",
+      "relevant_chunk_ids": ["Article 72:"],
+      "expected_keywords": ["post-market", "monitoring", "providers", "performance"],
+      "category": "monitoring"
+    }
+  ]
+}

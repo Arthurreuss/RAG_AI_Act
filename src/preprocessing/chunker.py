@@ -1,9 +1,21 @@
+"""
+Chunking strategies for EU AI Act document processing.
+Implements naive and semantic chunking with configurable parameters.
+"""
+
 import json
 import os
+from typing import List, Dict, Any
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-CHUNK_SIZE = 1000
-CHUNK_OVERLAP = 200
+# Milestone 2 spec: 200-500 tokens per chunk with 50-100 token overlap
+# Assuming ~4 chars per token, 300 tokens ≈ 1200 chars
+CHUNK_SIZE_TOKENS = 300
+CHUNK_OVERLAP_TOKENS = 75
+CHARS_PER_TOKEN = 4
+
+CHUNK_SIZE = CHUNK_SIZE_TOKENS * CHARS_PER_TOKEN  # ~1200 chars
+CHUNK_OVERLAP = CHUNK_OVERLAP_TOKENS * CHARS_PER_TOKEN  # ~300 chars
 
 def load_data(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
