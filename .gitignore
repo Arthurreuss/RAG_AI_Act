@@ -3,7 +3,8 @@ __pycache__/
 *$py.class
 *.so
 .Python
-data/
+data/*
+!data/test_set/
 venv/
 .venv
 pyproject.toml
@@ -11,11 +12,8 @@ pyproject.toml
 uv.lock
 env/
 .env
-retrieval/
 
 chroma_db/
-processed/
-raw/
 
 .vscode/
 .idea/

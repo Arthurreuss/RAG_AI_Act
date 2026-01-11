@@ -24,6 +24,7 @@ class ChunkProcessor:
         citation_chain,
         meta_info,
         chunks_accumulator,
+        root_type=None,  # <--- CHANGED: Added argument to track highest hierarchy
     ):
         """
         Processes nodes recursively.
@@ -35,6 +36,11 @@ class ChunkProcessor:
         node_type = node.get("type")
         node_text = node.get("text", "").strip()
         node_number = str(node.get("number", "")).strip()
+
+        # IDENTIFY HIERARCHY TYPE
+        # If a root_type was passed down, use it (we are inside a child).
+        # Otherwise, this current node is the top level, so use its type.
+        effective_root_type = root_type if root_type else node_type
 
         # 0. SPECIAL EDGE CASE: ANNEX II (Aggregate Everything)
         if node_id == "anx_II" or (
@@ -63,6 +69,17 @@ class ChunkProcessor:
             }
             chunks_accumulator.append(chunk)
             return  # STOP RECURSION FOR THIS NODE
+
+        # -----------------------------------------------------------
+        # NEW LOGIC: EXTRACT ANNEX NUMBER FROM TITLE IF MISSING
+        # -----------------------------------------------------------
+        if node_type == "annex" and not node_number:
+            title = node.get("title", "").strip()
+            title_identifier = title.split(" - ")[0].strip()
+            if title_identifier.upper().startswith("ANNEX"):
+                parts = title_identifier.split()
+                if len(parts) > 1:
+                    node_number = parts[1]
 
         # 1. MANAGE CITATION
         local_citation_chain = list(citation_chain)
@@ -109,7 +126,7 @@ class ChunkProcessor:
                 "chunk_id": full_chunk_id,
                 "text_to_embed": text_for_embedding,
                 "metadata": {
-                    "type": node_type,
+                    "type": effective_root_type,  # <--- CHANGED: Uses the highest hierarchy type (e.g., Article) instead of current node type
                     "citation": final_citation_string,
                     "chunk_number": node_number,
                     "chapter": meta_info.get("chapter", "Unknown"),
@@ -149,6 +166,7 @@ class ChunkProcessor:
                     citation_chain=local_citation_chain,
                     meta_info=meta_info,
                     chunks_accumulator=chunks_accumulator,
+                    root_type=effective_root_type,  # <--- CHANGED: Pass the hierarchy type down
                 )
 
                 if child.get("type") == "text_block":
@@ -168,6 +186,9 @@ class ChunkProcessor:
                 root_meta = item.get("metadata", {})
                 title = item.get("title", "")
 
+                # CHANGED: Capture the root type (e.g., 'article') here to start the chain
+                root_type_start = item.get("type")
+
                 if " - " in title:
                     short_title = title.split(" - ")[0]
                 else:
@@ -182,6 +203,7 @@ class ChunkProcessor:
                     citation_chain=initial_chain,
                     meta_info=root_meta,
                     chunks_accumulator=chunks_to_embed,
+                    root_type=root_type_start,  # <--- CHANGED: Pass into recursion
                 )
 
             except Exception as e:
@@ -195,11 +217,7 @@ class ChunkProcessor:
     # PART 2: CHUNK SPLITTING AND REFINEMENT
     # -------------------------------------------------
     def split_text_with_overlap(self, text, chunk_size=None, overlap=None):
-        """
-        Splits a string into a list of overlapping strings based on word count.
-        Allows overriding defaults.
-        """
-        # Use defaults from init if not provided
+        # ... (Same as your original code)
         c_size = chunk_size if chunk_size is not None else self.chunk_size
         o_lap = overlap if overlap is not None else self.overlap
 
@@ -223,10 +241,9 @@ class ChunkProcessor:
         return chunks
 
     def process_chunks(self, data, split_threshold=None):
-        """
-        Scans existing chunks and splits those that exceed the threshold.
-        """
-        # Use default from init if not provided
+        # ... (Same as your original code)
+        # Note: Since 'type' is fixed in process_recursive,
+        # the deepcopy here ensures the correct 'type' is preserved in split parts.
         thresh = (
             split_threshold if split_threshold is not None else self.split_threshold
         )
@@ -241,22 +258,18 @@ class ChunkProcessor:
             citation = item.get("metadata", {}).get("citation", "Unknown")
             word_count = len(original_text.split())
 
-            # CASE 1: Keep as is
             if word_count <= thresh:
                 new_data.append(item)
 
-            # CASE 2: Split
             else:
                 split_count += 1
                 sub_texts = self.split_text_with_overlap(original_text)
 
                 for i, sub_text in enumerate(sub_texts):
-                    # Deep copy to avoid reference issues
                     new_item = copy.deepcopy(item)
 
                     new_item["chunk_id"] = f"{item['chunk_id']}_part_{i+1}"
 
-                    # Update Text with context heuristic
                     if i > 0 and not sub_text.startswith(citation):
                         new_item["text_to_embed"] = (
                             f"{citation} (Part {i+1}): ...{sub_text}"
