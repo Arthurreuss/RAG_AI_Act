@@ -1,17 +1,39 @@
 preprocessing:
-  # Step 1: HTML Parsing
   url_ai_act: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401689
   file_path_extracted: data/json/ai_act_extracted.json
-  # Step 2: Chunking
   file_path_chunks: data/json/ai_act_chunks.json
-  # Step 3: Split long chunks
   file_path_chunks_split: data/json/ai_act_chunks_split.json
   chunk_overlap: 30
   split_threshold: 250
   chunk_size: 150
 
+test_set_path: data/test_set/golden_test_set.json
 
-  # Step 4: Embed chunks
+vector_store:
+  collection_name: ai_act_legal
+  path: data/chroma_db
+  embedding_model_map:
+    bge-m3: BAAI/bge-m3
+    snowflake-m: Snowflake/snowflake-arctic-embed-m
+    minilm: sentence-transformers/all-MiniLM-L6-v2
+
+rag_pipeline:
+  embedding_model_name: snowflake-m
+  llm_model: meta-llama/Meta-Llama-3.1-8B-Instruct
+  history_length: 6
+  retrieval_top_k: 5
+  generation_max_new_tokens: 512
+  max_context_chars: 32000
+  generation_temperature: 0.1
+  generation_top_p: 0.9
+
+streamlit:
+  chat_history_file: data/streamlit/chat_history.json
+
+
+
+
+
 
 
 

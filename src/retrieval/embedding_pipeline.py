@@ -8,14 +8,20 @@ from src.utils.helper import get_device
 
 
 class EmbeddingWithDB:
-    def __init__(self, collection_name="ai_act_legal"):
+    def __init__(self, cfg, collection_name=None):
         """
         Initializes the Engine with a Persistent Vector DB.
         """
         self.device = get_device(verbose=True)
         self.current_model_name = None
         self.model = None
-        self.client = chromadb.PersistentClient(path="data/chroma_db")
+        self.client = chromadb.PersistentClient(path=cfg["vector_store"]["path"])
+        collection_name = (
+            cfg["vector_store"]["collection_name"]
+            if collection_name is None
+            else collection_name
+        )
+        self.model_map = cfg["vector_store"]["embedding_model_map"]
 
         self.collection = self.client.get_or_create_collection(
             name=collection_name, metadata={"hnsw:space": "cosine"}
@@ -28,13 +34,7 @@ class EmbeddingWithDB:
         """
         Loads the embedding model based on key.
         """
-        model_map = {
-            "bge-m3": "BAAI/bge-m3",
-            "snowflake-m": "Snowflake/snowflake-arctic-embed-m",
-            "minilm": "sentence-transformers/all-MiniLM-L6-v2",
-        }
-
-        hf_id = model_map.get(model_name, model_name)
+        hf_id = self.model_map.get(model_name, model_name)
 
         if self.current_model_name == hf_id:
             return
