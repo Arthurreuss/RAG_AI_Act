@@ -4,13 +4,18 @@ __pycache__/
 *.so
 .Python
 
+data/*
+!data/test_set/
+
 venv/
+.venv
+pyproject.toml
+.python-version
+uv.lock
 env/
 .env
 
 chroma_db/
-processed/
-raw/
 
 .vscode/
 .idea/

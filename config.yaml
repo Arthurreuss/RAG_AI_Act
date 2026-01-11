@@ -1,0 +1,17 @@
+preprocessing:
+  # Step 1: HTML Parsing
+  url_ai_act: https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401689
+  file_path_extracted: data/json/ai_act_extracted.json
+  # Step 2: Chunking
+  file_path_chunks: data/json/ai_act_chunks.json
+  # Step 3: Split long chunks
+  file_path_chunks_split: data/json/ai_act_chunks_split.json
+  chunk_overlap: 30
+  split_threshold: 250
+  chunk_size: 150
+
+
+  # Step 4: Embed chunks
+
+
+
