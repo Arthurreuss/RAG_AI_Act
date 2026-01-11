@@ -5,7 +5,7 @@ import traceback
 
 
 class ChunkProcessor:
-    def __init__(self, split_threshold=250, chunk_size=150, overlap=30):
+    def __init__(self, split_threshold, chunk_size, overlap):
         """
         Initialize with default settings for chunk splitting.
         """
@@ -13,9 +13,6 @@ class ChunkProcessor:
         self.chunk_size = chunk_size
         self.overlap = overlap
 
-    # -------------------------------------------------
-    # PART 1: HIERARCHICAL STRUCTURE PROCESSING
-    # -------------------------------------------------
     def process_recursive(
         self,
         node,
@@ -24,7 +21,7 @@ class ChunkProcessor:
         citation_chain,
         meta_info,
         chunks_accumulator,
-        root_type=None,  # <--- CHANGED: Added argument to track highest hierarchy
+        root_type=None,
     ):
         """
         Processes nodes recursively.
@@ -37,12 +34,9 @@ class ChunkProcessor:
         node_text = node.get("text", "").strip()
         node_number = str(node.get("number", "")).strip()
 
-        # IDENTIFY HIERARCHY TYPE
-        # If a root_type was passed down, use it (we are inside a child).
-        # Otherwise, this current node is the top level, so use its type.
         effective_root_type = root_type if root_type else node_type
 
-        # 0. SPECIAL EDGE CASE: ANNEX II (Aggregate Everything)
+        # SPECIAL EDGE CASE: ANNEX II (Aggregate Everything)
         if node_id == "anx_II" or (
             node_type == "annex"
             and "criminal offences" in node.get("title", "").lower()
@@ -68,11 +62,9 @@ class ChunkProcessor:
                 },
             }
             chunks_accumulator.append(chunk)
-            return  # STOP RECURSION FOR THIS NODE
+            return
 
-        # -----------------------------------------------------------
-        # NEW LOGIC: EXTRACT ANNEX NUMBER FROM TITLE IF MISSING
-        # -----------------------------------------------------------
+        # EXTRACT ANNEX NUMBER FROM TITLE IF MISSING
         if node_type == "annex" and not node_number:
             title = node.get("title", "").strip()
             title_identifier = title.split(" - ")[0].strip()
@@ -166,7 +158,7 @@ class ChunkProcessor:
                     citation_chain=local_citation_chain,
                     meta_info=meta_info,
                     chunks_accumulator=chunks_accumulator,
-                    root_type=effective_root_type,  # <--- CHANGED: Pass the hierarchy type down
+                    root_type=effective_root_type,
                 )
 
                 if child.get("type") == "text_block":
@@ -186,7 +178,6 @@ class ChunkProcessor:
                 root_meta = item.get("metadata", {})
                 title = item.get("title", "")
 
-                # CHANGED: Capture the root type (e.g., 'article') here to start the chain
                 root_type_start = item.get("type")
 
                 if " - " in title:
@@ -203,7 +194,7 @@ class ChunkProcessor:
                     citation_chain=initial_chain,
                     meta_info=root_meta,
                     chunks_accumulator=chunks_to_embed,
-                    root_type=root_type_start,  # <--- CHANGED: Pass into recursion
+                    root_type=root_type_start,
                 )
 
             except Exception as e:
@@ -213,11 +204,8 @@ class ChunkProcessor:
 
         return chunks_to_embed
 
-    # -------------------------------------------------
     # PART 2: CHUNK SPLITTING AND REFINEMENT
-    # -------------------------------------------------
     def split_text_with_overlap(self, text, chunk_size=None, overlap=None):
-        # ... (Same as your original code)
         c_size = chunk_size if chunk_size is not None else self.chunk_size
         o_lap = overlap if overlap is not None else self.overlap
 
@@ -241,9 +229,6 @@ class ChunkProcessor:
         return chunks
 
     def process_chunks(self, data, split_threshold=None):
-        # ... (Same as your original code)
-        # Note: Since 'type' is fixed in process_recursive,
-        # the deepcopy here ensures the correct 'type' is preserved in split parts.
         thresh = (
             split_threshold if split_threshold is not None else self.split_threshold
         )

@@ -3,8 +3,10 @@ __pycache__/
 *$py.class
 *.so
 .Python
+
 data/*
 !data/test_set/
+
 venv/
 .venv
 pyproject.toml

@@ -14,10 +14,6 @@ class AIActParser:
     def __init__(self):
         self.headers = {"User-Agent": "Mozilla/5.0"}
 
-    # ==========================================
-    # 1. UTILITIES & CLEANING
-    # ==========================================
-
     def _clean_text(self, text):
         """Normalizes whitespace and removes non-breaking spaces."""
         if not text:
@@ -42,10 +38,6 @@ class AIActParser:
         chapter_title = self._clean_text(title_tag.get_text()) if title_tag else ""
         return f"{chapter_num} - {chapter_title}".strip(" -")
 
-    # ==========================================
-    # 2. TEXT STRUCTURE PARSERS (REGEX LOGIC)
-    # ==========================================
-
     def _extract_inline_roman_points(self, text):
         """
         Level 3: Detects inline roman numerals (i) to (vii).
@@ -60,7 +52,6 @@ class AIActParser:
         valid_indices = []
 
         for m in matches:
-            # --- CITATION GUARD (UPDATED) ---
             # Look closer at the prefix (last 20 chars)
             # We want to SKIP if we see: "Article 5(i)", "point 1(i)", "paragraph 2(i)"
             prefix = text[max(0, m.start() - 25) : m.start()]
@@ -84,14 +75,8 @@ class AIActParser:
         if not valid_indices:
             return text, []
 
-        # Logic to split text based on valid indices
-        parts = []
-        last_end = 0
-
-        # 1. Main Text (before first valid point)
         main_text = text[: valid_indices[0].start()].strip().rstrip(":")
 
-        # 2. Extract Children
         children = []
         for i, m in enumerate(valid_indices):
             num = m.group(1)  # e.g., (i)
@@ -129,10 +114,8 @@ class AIActParser:
             char_found = m.group(2)
             char_ord = ord(char_found)
 
-            # --- CITATION GUARD (UPDATED) ---
             prefix = text[max(0, m.start() - 25) : m.start()]
 
-            # Checks for: "point (a)", "point 1(a)", "Article 40 (a)"
             is_citation = re.search(
                 r"\b(?:points?|articles?|paragraphs?|sections?|regulations?|annex(?:es)?)\s*(?:[\d\w\.]+\s*)?$",
                 prefix,
@@ -142,7 +125,6 @@ class AIActParser:
             if is_citation:
                 continue
 
-            # --- SEQUENCE CHECK ---
             if char_ord == expected_char_ord:
                 valid_indices.append(m)
                 expected_char_ord += 1
@@ -166,7 +148,6 @@ class AIActParser:
 
             content = text[start_content:end_content].strip().strip(";")
 
-            # Recurse for Roman numerals inside the Alpha point
             child_main_text, child_subs = self._extract_inline_roman_points(content)
 
             children.append(
@@ -179,10 +160,6 @@ class AIActParser:
             )
 
         return main_text, children
-
-    # ==========================================
-    # 3. HTML PARSERS (TABLES & ARTICLES)
-    # ==========================================
 
     def _parse_points_from_table(self, table_tag):
         """
@@ -209,7 +186,6 @@ class AIActParser:
                 pt_num = self._clean_text(cells[0].get_text())
                 content_cell = cells[1]
 
-            # Process the row if we identified content
             if content_cell:
                 sub_children = []
 
@@ -335,60 +311,47 @@ class AIActParser:
         current_block = {"text_parts": [], "children": []}
 
         for child in para_div.children:
-            # --- Case A: It is a Table (List of Points) ---
             if child.name == "table":
                 points = self._parse_points_from_table(child)
                 current_block["children"].extend(points)
 
-            # --- Case B: It is Text ---
             elif child.name == "p" or isinstance(child, str):
                 text = self._clean_text(child.get_text() if child.name else child)
                 if not text:
                     continue
 
-                # CRITICAL LOGIC:
-                # If we encounter text AND the current block already has children (points),
-                # it means the previous logical block (Intro + List) is finished.
-                # We must start a NEW block for this new text.
                 if current_block["children"]:
                     sub_blocks.append(current_block)
                     current_block = {"text_parts": [], "children": []}
 
                 current_block["text_parts"].append(text)
 
-        # Append the final block currently in progress
         if current_block["text_parts"] or current_block["children"]:
             sub_blocks.append(current_block)
 
-        # 3. Construct the Final Object
-        # The first block is the "Root" Paragraph (e.g., "1")
         if not sub_blocks:
-            return None  # Should not happen given HTML structure
+            return None
 
         root_block = sub_blocks[0]
         root_text = " ".join(root_block["text_parts"])
 
-        # Clean inline regex points for the root text
         root_text, root_inline = self._extract_inline_alpha_points(root_text)
         if not root_inline:
             root_text, root_inline = self._extract_inline_roman_points(root_text)
 
         final_children = root_block["children"] + root_inline
 
-        # Process subsequent blocks as "Paragraph 1.x"
         for i, block in enumerate(sub_blocks[1:], start=1):
             block_text = " ".join(block["text_parts"])
 
-            # Clean inline regex points for sub-block text
             b_text, b_inline = self._extract_inline_alpha_points(block_text)
             if not b_inline:
                 b_text, b_inline = self._extract_inline_roman_points(b_text)
 
-            # Calculate sub-number (e.g., 1.1, 1.2)
             sub_num = f"{main_number}.{i}" if main_number else f"{i}"
 
             sub_node = {
-                "type": "paragraph",  # Explicitly requested type
+                "type": "paragraph",
                 "number": sub_num,
                 "text": b_text,
                 "children": block["children"] + b_inline,
@@ -452,7 +415,6 @@ class AIActParser:
                     pt_num = self._clean_text(sub_ps[0].get_text())
                     raw_text = self._clean_text(sub_ps[1].get_text())
 
-                    # Check for inline sub-points (a), (b)
                     main_text, inline_subs = self._extract_inline_alpha_points(raw_text)
 
                     point_data = {
@@ -482,10 +444,6 @@ class AIActParser:
             children.append(current_section)
 
         return children
-
-    # ==========================================
-    # 4. MAIN EXECUTION
-    # ==========================================
 
     def fetch_and_parse(self, url):
         print(f"Fetching content from: {url}")
@@ -617,9 +575,7 @@ class AIActParser:
             flat_text_blocks = [title_text]
 
             def flatten_node(node):
-                # 1. Add the text of the CURRENT node
                 if "text" in node and node["text"]:
-                    # Optional: prepend number if it's not the root Article text
                     prefix = (
                         f"{node.get('number', '')} "
                         if node.get("number") and node.get("type") != "paragraph"
@@ -627,12 +583,10 @@ class AIActParser:
                     )
                     flat_text_blocks.append(f"{prefix}{node['text']}".strip())
 
-                # 2. Recurse children
                 if "children" in node:
                     for c in node["children"]:
                         flatten_node(c)
 
-            # Process top-level children (Paragraphs)
             for child in article_children:
                 flatten_node(child)
 
