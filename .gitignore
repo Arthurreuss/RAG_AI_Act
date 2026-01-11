@@ -26,5 +26,3 @@ Thumbs.db
 
 *.log
 .pytest_cache/
-stream_lit/
-.streamlit/
