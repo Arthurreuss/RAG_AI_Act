@@ -4,7 +4,7 @@ from math import e
 import huggingface_hub
 from dotenv import load_dotenv
 
-from src.rag_pipeline import RAGChatbot
+from src.rag.rag_pipeline import RAGChatbot
 from src.utils.helper import load_config
 
 load_dotenv()

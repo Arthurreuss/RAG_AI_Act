@@ -1,5 +1,7 @@
 import json
 import os
+import sys
+from contextlib import contextmanager
 
 import torch
 import yaml
@@ -50,3 +52,19 @@ def get_device(verbose=True):
         print(f"Device Detected: {device.upper()} [{info}]")
 
     return device
+
+
+@contextmanager
+def suppress_c_stderr():
+    """
+    Redirects C-level stderr to /dev/null to hide annoying
+    backend logs (like ggml_metal_init) from C++ libraries.
+    """
+    with open(os.devnull, "w") as devnull:
+        old_stderr = os.dup(sys.stderr.fileno())
+        try:
+            os.dup2(devnull.fileno(), sys.stderr.fileno())
+            yield
+        finally:
+            os.dup2(old_stderr, sys.stderr.fileno())
+            os.close(old_stderr)

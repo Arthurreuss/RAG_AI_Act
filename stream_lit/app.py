@@ -37,4 +37,4 @@ except Exception as e:
 if st.session_state.page == "home":
     render_home()
 else:
-    render_chat(bot)
+    render_chat(cfg, bot)

@@ -51,18 +51,23 @@ class ContentResolver:
 
     def resolve_to_full_text(self, chunk_ids: List[str]) -> List[Dict]:
         """
-        Takes a list of chunk IDs, finds their distinct parents, and returns the full parent objects.
+        Takes a list of chunk IDs and returns ONLY the full parent object
+        that appears most frequently among them (or the first one as fallback).
         """
-        parent_ids = set()
-        resolved_docs = []
+        from collections import Counter
 
+        if not chunk_ids:
+            return []
+
+        valid_parents = []
         for cid in chunk_ids:
             pid = self.get_parent_id_from_chunk(cid)
             if pid and pid in self.full_docs_map:
-                if pid not in parent_ids:
-                    parent_ids.add(pid)
-                    resolved_docs.append(self.full_docs_map[pid])
-            else:
-                pass
+                valid_parents.append(pid)
 
-        return resolved_docs
+        if not valid_parents:
+            return []
+
+        most_common_pid = Counter(valid_parents).most_common(1)[0][0]
+
+        return [self.full_docs_map[most_common_pid]]

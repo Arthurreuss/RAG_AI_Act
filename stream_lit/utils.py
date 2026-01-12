@@ -5,12 +5,12 @@ from typing import Dict
 
 import streamlit as st
 
-from src.rag_pipeline import RAGChatbot
+from src.rag.rag_pipeline import RAGChatbot
 
 
 @st.cache_resource
 def get_chatbot(cfg):
-    bot = RAGChatbot(cfg=cfg, use_quantization=True)
+    bot = RAGChatbot(cfg=cfg)
     return bot
 
 
@@ -38,7 +38,7 @@ def switch_chat(chat_id, bot: RAGChatbot):
     bot.load_history(history)
 
 
-def create_new_chat():
+def create_new_chat(cfg, bot: RAGChatbot):
     base_name = "Chat"
     counter = 1
     while f"{base_name} {counter}" in st.session_state.all_chats:
@@ -46,8 +46,8 @@ def create_new_chat():
     new_id = f"{base_name} {counter}"
 
     st.session_state.all_chats[new_id] = []
-    switch_chat(new_id)
-    save_chat_history(st.session_state.all_chats)
+    switch_chat(new_id, bot)
+    save_chat_history(st.session_state.all_chats, cfg["streamlit"]["chat_history_file"])
 
 
 def delete_chat(chat_id):

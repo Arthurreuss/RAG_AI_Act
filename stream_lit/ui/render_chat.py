@@ -9,20 +9,22 @@ from stream_lit.utils import (
 )
 
 
-def render_chat(bot):
+def render_chat(cfg, bot):
     with st.sidebar:
         st.header("Chat Sessions")
 
         col_new, col_clear = st.columns([1, 1])
         with col_new:
             if st.button("➕ New", use_container_width=True):
-                create_new_chat()
+                create_new_chat(cfg, bot)
                 st.rerun()
         with col_clear:
             if st.button("🗑️ Clear All", use_container_width=True):
                 st.session_state.all_chats = {"New Chat": []}
                 switch_chat("New Chat", bot)
-                save_chat_history(st.session_state.all_chats)
+                save_chat_history(
+                    st.session_state.all_chats, cfg["streamlit"]["chat_history_file"]
+                )
                 st.rerun()
 
         st.markdown("---")
@@ -106,4 +108,6 @@ def render_chat(bot):
         st.session_state.all_chats[st.session_state.current_chat_id].append(
             {"role": "assistant", "content": response_text}
         )
-        save_chat_history(st.session_state.all_chats)
+        save_chat_history(
+            st.session_state.all_chats, cfg["streamlit"]["chat_history_file"]
+        )
