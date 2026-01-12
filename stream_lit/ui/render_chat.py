@@ -1,6 +1,9 @@
+import dis
+
 import streamlit as st
 
 from stream_lit.utils import (
+    convert_citation_to_key,
     create_new_chat,
     delete_chat,
     rename_chat,
@@ -100,10 +103,20 @@ def render_chat(cfg, bot):
                 st.markdown(response_text)
 
                 if sources:
+                    displayed = set()
                     with st.expander("View Sources"):
                         for s in sources:
-                            sid = s.get("chunk_id", s.get("id", "Unknown ID"))
-                            st.markdown(f"**[{sid}]**")
+                            sid = s.get("chunk_id", None)
+                            if sid is None:
+                                clean_id = s["metadata"]["citation"]
+                                url_query = s.get("id", "unknown")
+                            else:
+                                clean_id = bot._clean_source_id(sid)
+                                url_query = convert_citation_to_key(clean_id)
+                            if url_query not in displayed:
+                                url = f"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401689#{url_query}"
+                                st.markdown(f"**[{clean_id}]** - [Link]({url})")
+                                displayed.add(url_query)
 
         st.session_state.all_chats[st.session_state.current_chat_id].append(
             {"role": "assistant", "content": response_text}

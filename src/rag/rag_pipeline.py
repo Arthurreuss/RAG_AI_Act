@@ -1,8 +1,11 @@
+import re
 import textwrap
+import token
 import warnings
 from typing import Any, Dict, List
 
 from llama_cpp import Llama
+from numpy import full
 
 from src.retrieval.content_resolver import ContentResolver
 from src.retrieval.embedding_pipeline import EmbeddingWithDB
@@ -27,10 +30,13 @@ class RAGChatbot:
 
         model_path = cfg["rag_pipeline"]["llm_model"]
         print(f"Loading GGUF Model from {model_path}...")
+
+        n_ctx = cfg["rag_pipeline"].get("max_token_context", 8192)
+
         with suppress_c_stderr():
             self.llm = Llama(
                 model_path=model_path,
-                n_ctx=cfg["rag_pipeline"].get("max_token_context", 8192),
+                n_ctx=n_ctx,
                 n_gpu_layers=-1,
                 verbose=False,
             )
@@ -48,12 +54,22 @@ class RAGChatbot:
         print("Conversation history cleared.")
 
     def _count_tokens(self, text: str) -> int:
-        """
-        Accurately counts tokens using the Llama model's tokenizer.
-        """
+        """Accurately counts tokens using the Llama model's tokenizer."""
         if not text:
             return 0
         return len(self.llm.tokenize(text.encode("utf-8", errors="ignore")))
+
+    def _clean_source_id(self, source_id: str) -> str:
+        """
+        Simplifies granular IDs to the main element for cleaner citations.
+        Example: 'article_58_paragraph_2_point_d' -> 'Article 58'
+        """
+        clean_id = re.sub(
+            r"(_paragraph_|_point_|_subparagraph_|_part_).*", "", source_id
+        )
+        clean_id = clean_id.replace("_", " ")
+        clean_id = clean_id.capitalize()
+        return clean_id
 
     def _build_system_prompt(self) -> str:
         return textwrap.dedent(
@@ -64,51 +80,52 @@ class RAGChatbot:
             ### CRITICAL GUIDELINES:
             1. **Evidence-Based:** Answer ONLY using the information from the 'Context'.
             2. **Citations:** Every factual claim must be backed by a source ID.
-               - Format: "The AI Office is responsible for monitoring [Source: article_56]."
+               - **Strict Format:** Use only the Article, Recital, or Annex number.
+               - Example: "The AI Office is responsible for monitoring [Source: article_56]."
+               - Do NOT include paragraph numbers in the citation tag (e.g., avoid [article_56_paragraph_1]).
             3. **Uncertainty:** If the provided context does NOT contain the answer, strictly reply: "I cannot answer this based on the provided documents."
             4. **Tone:** Professional, concise, and neutral.
             """
         ).strip()
 
     def _build_context_window(
-        self, items: List[Dict], token_budget: int, use_full_doc: bool
+        self, items: List[Dict], budget: int, use_full_doc: bool, full_doc: Dict = None
     ) -> str:
         """
         Fits retrieval items into the context window based on strict token budget.
-        Returns a formatted string of documents/chunks.
+        Ensures citations are cleaned and Full Docs include source tags.
         """
         formatted_parts = []
-        current_tokens = 0
+        token_count = 0
 
+        if use_full_doc:
+            title = full_doc.get("title", "")
+            number = full_doc.get("number", "")
+            type_ = full_doc.get("type", "Document").title()
+            text = full_doc.get("text", "")
+
+            clean_id = f"{type_}_{number}".lower().replace(" ", "_")
+
+            entry = f"=== {type_} {number}: {title} ===\n[Source: {clean_id}]\n{text}"
+            entry_tokens = self._count_tokens(entry)
+            if (token_count + entry_tokens) <= budget:
+                formatted_parts.append(entry)
+                token_count += entry_tokens
         for item in items:
-            if use_full_doc:
-                title = item.get("title", "")
-                number = item.get("number", "")
-                type_ = item.get("type", "").title()
-                text = item.get("text", "")
-                entry = f"=== {type_} {number}: {title} ===\n{text}"
-            else:
-                source_id = item.get("chunk_id", "unknown")
-                text = item.get("text_to_embed", item.get("text", "")).strip()
-                entry = f"[Source: {source_id}]\n{text}"
+            raw_id = item.get("chunk_id", "unknown")
+            clean_id = self._clean_source_id(raw_id)
 
-            entry_tokens = self._count_tokens(entry) + 3
-
-            if current_tokens + entry_tokens > token_budget:
-                warnings.warn(
-                    f"Context budget reached ({current_tokens}/{token_budget} tokens). Stopping context addition."
-                )
+            text = item.get("text_to_embed", item.get("text", "")).strip()
+            entry = f"[Source: {clean_id}]\n{text}"
+            entry_tokens = self._count_tokens(entry)
+            if (token_count + entry_tokens) > budget:
                 break
-
             formatted_parts.append(entry)
-            current_tokens += entry_tokens
+            token_count += entry_tokens
 
         return "\n\n".join(formatted_parts)
 
     def _rewrite_query(self, user_query: str) -> str:
-        """
-        Uses Llama.cpp raw completion to rewrite the query.
-        """
         if not self.history:
             return user_query
 
@@ -130,7 +147,6 @@ class RAGChatbot:
         """
 
         output = self.llm(prompt, max_tokens=128, stop=["<|eot_id|>"], temperature=0.0)
-
         rewritten = output["choices"][0]["text"].strip()
         print(f"Rewrote: '{user_query}' -> '{rewritten}'")
         return rewritten
@@ -139,32 +155,32 @@ class RAGChatbot:
         self, user_query: str, k: int, use_full_doc: bool = False, verbose: bool = False
     ):
         search_query = self._rewrite_query(user_query)
+
         retrieved_items = self.retriever.search(search_query, k=k)
 
         if use_full_doc:
             chunk_ids = [c["chunk_id"] for c in retrieved_items]
-            retrieved_items = self.content_resolver.resolve_to_full_text(chunk_ids)
-            if verbose:
-                print(f"Resolved to {len(retrieved_items)} full document(s).")
+            full_doc = self.content_resolver.resolve_to_full_text(chunk_ids)
 
         system_prompt = self._build_system_prompt()
         max_response_tokens = self.cfg["rag_pipeline"].get(
             "generation_max_new_tokens", 512
         )
         total_ctx = self.llm.n_ctx()
-
         base_cost = (
-            self._count_tokens(system_prompt) + self._count_tokens(user_query) + 50
+            self._count_tokens(system_prompt) + self._count_tokens(user_query) + 100
         )
+        available_budget = total_ctx - max_response_tokens - base_cost
 
-        remaining_budget = total_ctx - max_response_tokens - base_cost
+        context_str = self._build_context_window(
+            retrieved_items,
+            budget=available_budget,
+            use_full_doc=use_full_doc,
+            full_doc=full_doc if use_full_doc else None,
+        )
+        context_cost = self._count_tokens(context_str)
 
-        if remaining_budget <= 0:
-            warnings.warn(
-                "Query + System prompt too large for context window! Truncating..."
-            )
-            remaining_budget = 100
-
+        history_budget = available_budget - context_cost
         history_messages = []
         history_cost = 0
         history_limit_turns = self.cfg["rag_pipeline"].get("history_length", 6)
@@ -172,20 +188,20 @@ class RAGChatbot:
         for turn in reversed(self.history[-history_limit_turns:]):
             msg_content = f"{turn['role']}: {turn['content']}"
             msg_cost = self._count_tokens(msg_content) + 5
-            if (remaining_budget - history_cost - msg_cost) < 500:
+
+            if (history_cost + msg_cost) > history_budget:
+                if verbose:
+                    print(
+                        f"Stopping history at {len(history_messages)} turns due to budget."
+                    )
                 break
 
             history_messages.insert(0, turn)
             history_cost += msg_cost
 
-        context_budget = remaining_budget - history_cost
-        context_str = self._build_context_window(
-            retrieved_items, context_budget, use_full_doc
-        )
-
         if verbose:
             print(
-                f"Token Usage -- Hist: {history_cost}, Context: {self._count_tokens(context_str)}, Avail: {remaining_budget}"
+                f"Token Stats: Context={context_cost}, History={history_cost}, Remaining={history_budget - history_cost}/{available_budget}"
             )
 
         messages = [{"role": "system", "content": system_prompt}]
@@ -207,5 +223,7 @@ class RAGChatbot:
 
         self.history.append({"role": "user", "content": user_query})
         self.history.append({"role": "assistant", "content": response_text})
-
+        # add full doc to returned sources if used
+        if use_full_doc and full_doc:
+            retrieved_items.append(full_doc)
         return response_text, retrieved_items

@@ -1,5 +1,6 @@
 import json
 import re
+from collections import Counter
 from typing import Dict, List, Optional
 
 
@@ -49,12 +50,11 @@ class ContentResolver:
 
         return None
 
-    def resolve_to_full_text(self, chunk_ids: List[str]) -> List[Dict]:
+    def resolve_to_full_text(self, chunk_ids: List[str]) -> Dict:
         """
         Takes a list of chunk IDs and returns ONLY the full parent object
         that appears most frequently among them (or the first one as fallback).
         """
-        from collections import Counter
 
         if not chunk_ids:
             return []
@@ -70,4 +70,4 @@ class ContentResolver:
 
         most_common_pid = Counter(valid_parents).most_common(1)[0][0]
 
-        return [self.full_docs_map[most_common_pid]]
+        return self.full_docs_map[most_common_pid]

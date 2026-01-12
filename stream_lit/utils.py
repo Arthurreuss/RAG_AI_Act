@@ -1,6 +1,7 @@
 import base64
 import json
 import os
+import re
 from typing import Dict
 
 import streamlit as st
@@ -88,7 +89,6 @@ def set_background(image_file):
 
     page_bg_img = f"""
     <style>
-    /* 1. Background Image */
     .stApp {{
         background-image: url("data:image/png;base64,{b64_data}");
         background-size: cover;
@@ -97,29 +97,55 @@ def set_background(image_file):
         background-attachment: fixed;
     }}
     
-    /* 2. CUSTOM BUTTON COLOR (#FFCC00) */
-    div.stButton > button {{
-        background-color: #FFCC00 !important;
-        color: black !important;
-        border: none !important;
-        
-        /* Keep the width constraint from previous step */
-        width: auto !important;
-        padding-left: 20px;
-        padding-right: 20px;
-    }}
-    
-    /* Hover effect */
-    div.stButton > button:hover {{
-        background-color: #E6B800 !important; /* Slightly darker yellow */
-        color: black !important;
-    }}
-
-    /* 3. Info Box Sizing */
-    div[data-testid="stAlert"] {{
-        width: fit-content !important;
-        max-width: 100%;
-    }}
     </style>
     """
     st.markdown(page_bg_img, unsafe_allow_html=True)
+
+
+def to_roman(n):
+    """Converts an integer to a Roman numeral (covers standard Annex ranges)."""
+    try:
+        n = int(n)
+    except ValueError:
+        return str(n)
+
+    val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+    syb = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+    roman_num = ""
+    i = 0
+    while n > 0:
+        for _ in range(n // val[i]):
+            roman_num += syb[i]
+            n -= val[i]
+        i += 1
+    return roman_num
+
+
+def convert_citation_to_key(citation_str):
+    """
+    Converts citation strings into ID keys.
+    Examples:
+    "Article 56"  -> "art_56"
+    "Recital 120" -> "rct_120"
+    "Annex 4"     -> "anx_IV"
+    """
+    clean_str = citation_str.lower().strip()
+
+    match = re.search(r"([a-z]+)\s*(\d+)", clean_str)
+
+    if not match:
+        return None
+
+    doc_type = match.group(1)
+    number = int(match.group(2))
+
+    if "art" in doc_type:
+        return f"art_{number}"
+
+    elif "rec" in doc_type:
+        return f"rct_{number}"
+
+    elif "ann" in doc_type or "anx" in doc_type:
+        return f"anx_{to_roman(number)}"
+
+    return None
