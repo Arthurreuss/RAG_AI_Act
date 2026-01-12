@@ -7,7 +7,9 @@ preprocessing:
   split_threshold: 250
   chunk_size: 150
 
-test_set_path: data/test_set/golden_test_set.json
+test_set:
+  single_turn_path: data/test_set/golden_test_set.json
+  multi_turn_path: data/test_set/multi_turn.json
 
 vector_store:
   collection_name: ai_act_legal
@@ -28,7 +30,7 @@ rag_pipeline:
   generation_top_p: 0.9
 
 streamlit:
-  chat_history_file: data/streamlit/chat_history.json
+  chat_history_file: results/streamlit/chat_history.json
 
 
 #to download model: huggingface-cli download Bartowski/Meta-Llama-3.1-8B-Instruct-GGUF Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf --local-dir data/llm --local-dir-use-symlinks False

@@ -1,5 +1,3 @@
-import dis
-
 import streamlit as st
 
 from stream_lit.utils import (
@@ -72,7 +70,6 @@ def render_chat(cfg, bot):
         st.markdown("---")
         st.header("Settings")
         use_full_doc = st.toggle("Use Full Document Context", value=False)
-        k_retrieval = st.slider("Documents to Retrieve", 1, 10, 3)
 
     st.subheader(f"{st.session_state.current_chat_id}")
 
@@ -96,9 +93,7 @@ def render_chat(cfg, bot):
                     st.session_state.all_chats[st.session_state.current_chat_id][:-1]
                 )
 
-                response_text, sources = bot.chat(
-                    user_query, k=k_retrieval, use_full_doc=use_full_doc
-                )
+                response_text, sources = bot.chat(user_query, use_full_doc=use_full_doc)
 
                 st.markdown(response_text)
 

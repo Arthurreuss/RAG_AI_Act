@@ -1,11 +1,8 @@
 import re
 import textwrap
-import token
-import warnings
-from typing import Any, Dict, List
+from typing import Dict, List
 
 from llama_cpp import Llama
-from numpy import full
 
 from src.retrieval.content_resolver import ContentResolver
 from src.retrieval.embedding_pipeline import EmbeddingWithDB
@@ -13,11 +10,12 @@ from src.utils.helper import get_device, suppress_c_stderr
 
 
 class RAGChatbot:
-    def __init__(self, cfg: Dict):
+    def __init__(self, cfg: Dict, verbose: bool = False):
         """
         Initializes the full RAG pipeline: Vector DB + LLM + Memory.
         """
-        self.device = get_device(verbose=True)
+        self.device = get_device(verbose=verbose)
+        self.verbose = verbose
         self.cfg = cfg
         self.history = []
 
@@ -29,7 +27,8 @@ class RAGChatbot:
         )
 
         model_path = cfg["rag_pipeline"]["llm_model"]
-        print(f"Loading GGUF Model from {model_path}...")
+        if self.verbose:
+            print(f"Loading GGUF Model from {model_path}...")
 
         n_ctx = cfg["rag_pipeline"].get("max_token_context", 8192)
 
@@ -47,11 +46,13 @@ class RAGChatbot:
 
     def load_history(self, history: List[Dict]):
         self.history = history
-        print(f"Loaded history with {len(history)} messages.")
+        if self.verbose:
+            print(f"Loaded history with {len(history)} messages.")
 
     def clear_history(self):
         self.history = []
-        print("Conversation history cleared.")
+        if self.verbose:
+            print("Conversation history cleared.")
 
     def _count_tokens(self, text: str) -> int:
         """Accurately counts tokens using the Llama model's tokenizer."""
@@ -148,15 +149,16 @@ class RAGChatbot:
 
         output = self.llm(prompt, max_tokens=128, stop=["<|eot_id|>"], temperature=0.0)
         rewritten = output["choices"][0]["text"].strip()
-        print(f"Rewrote: '{user_query}' -> '{rewritten}'")
+        if self.verbose:
+            print(f"Rewrote: '{user_query}' -> '{rewritten}'")
         return rewritten
 
-    def chat(
-        self, user_query: str, k: int, use_full_doc: bool = False, verbose: bool = False
-    ):
+    def chat(self, user_query: str, use_full_doc: bool = False):
         search_query = self._rewrite_query(user_query)
 
-        retrieved_items = self.retriever.search(search_query, k=k)
+        retrieved_items = self.retriever.search(
+            search_query, k=self.cfg["rag_pipeline"].get("retrieval_top_k", 5)
+        )
 
         if use_full_doc:
             chunk_ids = [c["chunk_id"] for c in retrieved_items]
@@ -190,7 +192,7 @@ class RAGChatbot:
             msg_cost = self._count_tokens(msg_content) + 5
 
             if (history_cost + msg_cost) > history_budget:
-                if verbose:
+                if self.verbose:
                     print(
                         f"Stopping history at {len(history_messages)} turns due to budget."
                     )
@@ -199,7 +201,7 @@ class RAGChatbot:
             history_messages.insert(0, turn)
             history_cost += msg_cost
 
-        if verbose:
+        if self.verbose:
             print(
                 f"Token Stats: Context={context_cost}, History={history_cost}, Remaining={history_budget - history_cost}/{available_budget}"
             )
@@ -223,7 +225,6 @@ class RAGChatbot:
 
         self.history.append({"role": "user", "content": user_query})
         self.history.append({"role": "assistant", "content": response_text})
-        # add full doc to returned sources if used
         if use_full_doc and full_doc:
             retrieved_items.append(full_doc)
         return response_text, retrieved_items

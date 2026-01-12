@@ -61,7 +61,6 @@ def analyze_chunks(file_path, max_threshold, bin_size):
         f"{max_threshold}+"
     ]
 
-    # Table Header
     header = f"{'TYPE':<25} | " + " | ".join([f"{b:<9}" for b in bins]) + " | TOTAL"
     print(header)
     print("-" * len(header))

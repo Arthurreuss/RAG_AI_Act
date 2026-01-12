@@ -18,7 +18,7 @@ if __name__ == "__main__":
     query1 = "What are the transparency obligations for high-risk AI systems?"
     print(f"\nUser: {query1}")
 
-    answer1, sources1 = bot.chat(query1, k=3)
+    answer1, sources1 = bot.chat(query1)
 
     print(f"Assistant:\n{answer1}")
     print(
@@ -28,6 +28,6 @@ if __name__ == "__main__":
     query2 = "Does this apply to emotion recognition systems too?"
     print(f"\nUser: {query2}")
 
-    answer2, sources2 = bot.chat(query2, k=3)
+    answer2, sources2 = bot.chat(query2)
 
     print(f"Assistant:\n{answer2}")
