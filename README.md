@@ -1,5 +1,7 @@
 # EU AI Act RAG Assistant
 ![EU AI Act Logo](data/img/streamlit_home.png)
+[Source of Background image](https://parvaconsulting.com/wp-content/uploads/EU-AI-ACT.jpg)
+
 A Retrieval-Augmented Generation (RAG) system designed to answer questions about the European Union AI Act using local LLM inference and semantic search capabilities.
 
 ## Overview
