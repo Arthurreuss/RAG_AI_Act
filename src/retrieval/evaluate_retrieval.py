@@ -1,55 +1,79 @@
 import math
+from typing import Any, Dict, List, Union
 
 import numpy as np
 from tqdm import tqdm
 
 
-def evaluate_retrieval(engine, golden_set, k_values=[1, 3, 5, 10]):
-    """
-    Runs comprehensive retrieval metrics on a golden dataset.
+def evaluate_retrieval(
+    engine: Any, golden_set: List[Dict[str, Any]], k_values: List[int] = [1, 3, 5, 10]
+) -> Dict[str, float]:
+    """Runs comprehensive retrieval metrics on a golden dataset.
 
-    Metrics Calculated:
-    1. Recall@k (Hit Rate): Did the correct chunk appear in top k?
-    2. Precision@k: (Relevant Items / k). For single-label RAG, this is 1/k if found, else 0.
-    3. MRR (Mean Reciprocal Rank): 1 / Rank of first correct answer.
-    4. NDCG@k (Normalized Discounted Cumulative Gain): Measures ranking quality with position decay.
-    """
-    total_queries = len(golden_set)
+    This function calculates standard Information Retrieval (IR) metrics to assess
+    how well the vector engine finds relevant context chunks for a given set of
+    test questions.
 
-    results = {
-        "Recall": {k: 0 for k in k_values},
-        "Precision": {k: 0 for k in k_values},
-        "NDCG": {k: 0 for k in k_values},
-        "MRR": 0,
+
+
+    Args:
+        engine: The search engine instance (e.g., EmbeddingWithDB) that has a
+            `.search(query, k)` method.
+        golden_set (List[Dict[str, Any]]): A list of test cases, where each case
+            is a dictionary containing 'question' and 'context_id'.
+        k_values (List[int]): The specific 'k' thresholds at which to calculate
+            metrics. Defaults to [1, 3, 5, 10].
+
+    Returns:
+        Dict[str, float]: A dictionary containing calculated metrics:
+            - Recall@k: Proportion of queries where the target was in top k.
+            - Precision@k: Average precision at rank k.
+            - NDCG@k: Ranking quality considering the position of the target.
+            - MRR: Mean Reciprocal Rank across all queries.
+    """
+    total_queries: int = len(golden_set)
+
+    results: Dict[str, Any] = {
+        "Recall": {k: 0.0 for k in k_values},
+        "Precision": {k: 0.0 for k in k_values},
+        "NDCG": {k: 0.0 for k in k_values},
+        "MRR": 0.0,
     }
 
     print(f"Evaluating {total_queries} queries...")
 
     for item in tqdm(golden_set):
-        query = item["question"]
-        target_id = item["context_id"]
+        query: str = item["question"]
+        target_id: str = item["context_id"]
 
-        max_k = max(k_values)
-        search_res = engine.search(query, k=max_k)
-        retrieved_ids = [res["chunk_id"] for res in search_res]
+        max_k: int = max(k_values)
+        search_res: List[Dict[str, Any]] = engine.search(query, k=max_k)
+        retrieved_ids: List[str] = [res["chunk_id"] for res in search_res]
 
+        # Calculate MRR (Mean Reciprocal Rank)
+        # MRR = 1/n * Σ (1 / rank_i)
         if target_id in retrieved_ids:
-            rank = retrieved_ids.index(target_id) + 1
+            rank: int = retrieved_ids.index(target_id) + 1
             results["MRR"] += 1.0 / rank
         else:
             rank = None
 
         for k in k_values:
-            top_k_ids = retrieved_ids[:k]
+            top_k_ids: List[str] = retrieved_ids[:k]
 
-            if target_id in top_k_ids:
+            if rank is not None and target_id in top_k_ids:
+                # Recall@k (Hit Rate)
                 results["Recall"][k] += 1
-                results["Precision"][k] += 1.0 / k
-                results["NDCG"][k] += 1.0 / math.log2(rank + 1)
-            else:
-                pass
 
-    final_metrics = {}
+                # Precision@k
+                results["Precision"][k] += 1.0 / k
+
+                # NDCG@k (Normalized Discounted Cumulative Gain)
+                # For single relevant item, DCG = 1 / log2(rank + 1)
+                # Since IDCG is 1 (perfect rank at 1), NDCG = DCG
+                results["NDCG"][k] += 1.0 / math.log2(rank + 1)
+
+    final_metrics: Dict[str, float] = {}
 
     for k in k_values:
         final_metrics[f"Recall@{k}"] = round(results["Recall"][k] / total_queries, 3)

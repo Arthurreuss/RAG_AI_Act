@@ -2,55 +2,81 @@ import copy
 import json
 import os
 import traceback
+from typing import Any, Dict, List, Optional, Union
 
 
 class ChunkProcessor:
-    def __init__(self, split_threshold, chunk_size, overlap):
+    """A processor for transforming hierarchical legal documents into flat chunks.
+
+    This class handles recursive processing of nested document structures (like JSON
+    exports of legislation), manages context propagation, and performs text
+    splitting with overlap for oversized chunks.
+
+    Attributes:
+        split_threshold (int): Maximum number of words allowed before a chunk is split.
+        chunk_size (int): Target word count for each sub-chunk.
+        overlap (int): Number of overlapping words between consecutive sub-chunks.
+    """
+
+    def __init__(self, split_threshold: int, chunk_size: int, overlap: int) -> None:
+        """Initializes the ChunkProcessor with splitting parameters.
+
+        Args:
+            split_threshold (int): The word count limit to trigger splitting.
+            chunk_size (int): The number of words in each split part.
+            overlap (int): The number of words to overlap between parts.
         """
-        Initialize with default settings for chunk splitting.
-        """
-        self.split_threshold = split_threshold
-        self.chunk_size = chunk_size
-        self.overlap = overlap
+        self.split_threshold: int = split_threshold
+        self.chunk_size: int = chunk_size
+        self.overlap: int = overlap
 
     def process_recursive(
         self,
-        node,
-        parent_id_chain,
-        parent_context_text,
-        citation_chain,
-        meta_info,
-        chunks_accumulator,
-        root_type=None,
-    ):
-        """
-        Processes nodes recursively.
-        Handles SIBLING context (Text Block -> Point) and Annex II aggregation.
-        Appends results directly to chunks_accumulator list.
-        """
+        node: Dict[str, Any],
+        parent_id_chain: str,
+        parent_context_text: str,
+        citation_chain: List[str],
+        meta_info: Dict[str, Any],
+        chunks_accumulator: List[Dict[str, Any]],
+        root_type: Optional[str] = None,
+    ) -> None:
+        """Processes document nodes recursively to build flattened chunks.
 
-        node_id = node.get("id", "")
-        node_type = node.get("type")
-        node_text = node.get("text", "").strip()
-        node_number = str(node.get("number", "")).strip()
+        This method handles hierarchical ID generation, citation building, sibling
+        context aggregation (e.g., text blocks leading into points), and special
+        handling for aggregated annexes.
 
-        effective_root_type = root_type if root_type else node_type
+        Args:
+            node (Dict[str, Any]): The current node in the hierarchy.
+            parent_id_chain (str): The concatenated ID string from parent levels.
+            parent_context_text (str): Accumulated text context from parent nodes.
+            citation_chain (List[str]): List of identifiers for citation building.
+            meta_info (Dict[str, Any]): Metadata for the current branch (e.g., chapter).
+            chunks_accumulator (List[Dict[str, Any]]): List to store generated chunks.
+            root_type (Optional[str]): The high-level type (e.g., 'article') to preserve.
+        """
+        node_id: str = node.get("id", "")
+        node_type: str = node.get("type", "")
+        node_text: str = node.get("text", "").strip()
+        node_number: str = str(node.get("number", "")).strip()
+
+        effective_root_type: Optional[str] = root_type if root_type else node_type
 
         # SPECIAL EDGE CASE: ANNEX II (Aggregate Everything)
         if node_id == "anx_II" or (
             node_type == "annex"
             and "criminal offences" in node.get("title", "").lower()
         ):
-            full_text_blob = [node_text]
+            full_text_blob: List[str] = [node_text]
 
             if "children" in node:
                 for child in node["children"]:
-                    child_text = child.get("text", "").strip()
+                    child_text: str = child.get("text", "").strip()
                     if child_text:
                         full_text_blob.append(child_text)
 
-            combined_blob = " ".join(full_text_blob)
-            chunk = {
+            combined_blob: str = " ".join(full_text_blob)
+            chunk: Dict[str, Any] = {
                 "chunk_id": node_id,
                 "text_to_embed": f"{node.get('title', 'Annex II')}: {combined_blob}",
                 "metadata": {
@@ -66,45 +92,44 @@ class ChunkProcessor:
 
         # EXTRACT ANNEX NUMBER FROM TITLE IF MISSING
         if node_type == "annex" and not node_number:
-            title = node.get("title", "").strip()
-            title_identifier = title.split(" - ")[0].strip()
+            title: str = node.get("title", "").strip()
+            title_identifier: str = title.split(" - ")[0].strip()
             if title_identifier.upper().startswith("ANNEX"):
-                parts = title_identifier.split()
+                parts: List[str] = title_identifier.split()
                 if len(parts) > 1:
                     node_number = parts[1]
 
         # 1. MANAGE CITATION
-        local_citation_chain = list(citation_chain)
+        local_citation_chain: List[str] = list(citation_chain)
         if node_number:
             if not local_citation_chain or not local_citation_chain[-1].endswith(
                 node_number
             ):
                 local_citation_chain.append(node_number)
 
-        final_citation_string = " ".join(local_citation_chain)
+        final_citation_string: str = " ".join(local_citation_chain)
 
         # 2. ID GENERATION
         if node_number:
-            clean_num = (
+            clean_num: str = (
                 node_number.replace("(", "")
                 .replace(")", "")
                 .replace(".", "")
                 .strip()
                 .lower()
             )
-            id_segment = f"{node_type}_{clean_num}"
+            id_segment: str = f"{node_type}_{clean_num}"
         else:
             id_segment = node_type
 
-        if parent_id_chain:
-            full_chunk_id = f"{parent_id_chain}_{id_segment}"
-        else:
-            full_chunk_id = id_segment
+        full_chunk_id: str = (
+            f"{parent_id_chain}_{id_segment}" if parent_id_chain else id_segment
+        )
 
         # 3. CONTEXT STRATEGY (Parent -> Node)
         if node_type in ["article", "annex"]:
-            combined_text = ""
-            text_for_embedding = ""
+            combined_text: str = ""
+            text_for_embedding: str = ""
         else:
             if parent_context_text:
                 combined_text = f"{parent_context_text} {node_text}"
@@ -118,7 +143,7 @@ class ChunkProcessor:
                 "chunk_id": full_chunk_id,
                 "text_to_embed": text_for_embedding,
                 "metadata": {
-                    "type": effective_root_type,  # <--- CHANGED: Uses the highest hierarchy type (e.g., Article) instead of current node type
+                    "type": effective_root_type,
                     "citation": final_citation_string,
                     "chunk_number": node_number,
                     "chapter": meta_info.get("chapter", "Unknown"),
@@ -129,23 +154,22 @@ class ChunkProcessor:
 
         # 5. RECURSE WITH SIBLING CONTEXT
         if "children" in node and isinstance(node["children"], list):
-            sibling_intro_context = ""
+            sibling_intro_context: str = ""
 
             for idx, child in enumerate(node["children"]):
                 if node_type in ["article", "annex"]:
-                    base_context_for_child = ""
+                    base_context_for_child: str = ""
                 else:
                     base_context_for_child = combined_text
 
-                if sibling_intro_context:
-                    context_to_pass = (
-                        f"{base_context_for_child} {sibling_intro_context}"
-                    )
-                else:
-                    context_to_pass = base_context_for_child
+                context_to_pass: str = (
+                    f"{base_context_for_child} {sibling_intro_context}"
+                    if sibling_intro_context
+                    else base_context_for_child
+                )
 
-                child_id_suffix = f"item_{idx}" if not child.get("number") else ""
-                next_id_chain = (
+                child_id_suffix: str = f"item_{idx}" if not child.get("number") else ""
+                next_id_chain: str = (
                     f"{full_chunk_id}_{child_id_suffix}"
                     if child_id_suffix
                     else full_chunk_id
@@ -167,25 +191,31 @@ class ChunkProcessor:
                 if child.get("type") == "section":
                     sibling_intro_context = ""
 
-    def process_legal_json(self, input_data):
+    def process_legal_json(
+        self, input_data: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """Main entry point for processing the raw hierarchical JSON data.
+
+        Args:
+            input_data (List[Dict[str, Any]]): List of hierarchical document nodes.
+
+        Returns:
+            List[Dict[str, Any]]: A flattened list of chunk dictionaries.
         """
-        Main entry point for processing the raw hierarchical JSON.
-        """
-        chunks_to_embed = []
+        chunks_to_embed: List[Dict[str, Any]] = []
 
         for item in input_data:
             try:
-                root_meta = item.get("metadata", {})
-                title = item.get("title", "")
-
-                root_type_start = item.get("type")
+                root_meta: Dict[str, Any] = item.get("metadata", {})
+                title: str = item.get("title", "")
+                root_type_start: Optional[str] = item.get("type")
 
                 if " - " in title:
-                    short_title = title.split(" - ")[0]
+                    short_title: str = title.split(" - ")[0]
                 else:
                     short_title = f"{item.get('type', 'Item').capitalize()} {item.get('number', '')}".strip()
 
-                initial_chain = [short_title]
+                initial_chain: List[str] = [short_title]
 
                 self.process_recursive(
                     node=item,
@@ -204,22 +234,33 @@ class ChunkProcessor:
 
         return chunks_to_embed
 
-    # PART 2: CHUNK SPLITTING AND REFINEMENT
-    def split_text_with_overlap(self, text, chunk_size=None, overlap=None):
-        c_size = chunk_size if chunk_size is not None else self.chunk_size
-        o_lap = overlap if overlap is not None else self.overlap
+    def split_text_with_overlap(
+        self, text: str, chunk_size: Optional[int] = None, overlap: Optional[int] = None
+    ) -> List[str]:
+        """Splits a long string into smaller segments based on word count and overlap.
 
-        words = text.split()
+        Args:
+            text (str): The text to be split.
+            chunk_size (Optional[int]): Word limit for each part. Defaults to self.chunk_size.
+            overlap (Optional[int]): Word overlap between parts. Defaults to self.overlap.
+
+        Returns:
+            List[str]: A list of text segments.
+        """
+        c_size: int = chunk_size if chunk_size is not None else self.chunk_size
+        o_lap: int = overlap if overlap is not None else self.overlap
+
+        words: List[str] = text.split()
 
         if len(words) <= c_size:
             return [text]
 
-        chunks = []
-        start = 0
+        chunks: List[str] = []
+        start: int = 0
         while start < len(words):
-            end = start + c_size
-            chunk_words = words[start:end]
-            chunk_str = " ".join(chunk_words)
+            end: int = start + c_size
+            chunk_words: List[str] = words[start:end]
+            chunk_str: str = " ".join(chunk_words)
             chunks.append(chunk_str)
 
             start += c_size - o_lap
@@ -228,31 +269,41 @@ class ChunkProcessor:
 
         return chunks
 
-    def process_chunks(self, data, split_threshold=None):
-        thresh = (
+    def process_chunks(
+        self, data: List[Dict[str, Any]], split_threshold: Optional[int] = None
+    ) -> List[Dict[str, Any]]:
+        """Scans chunks and splits those exceeding the word threshold.
+
+        Args:
+            data (List[Dict[str, Any]]): The list of flattened chunks to check.
+            split_threshold (Optional[int]): The word threshold for splitting.
+                Defaults to self.split_threshold.
+
+        Returns:
+            List[Dict[str, Any]]: A new list of chunks including the split segments.
+        """
+        thresh: int = (
             split_threshold if split_threshold is not None else self.split_threshold
         )
 
-        new_data = []
-        split_count = 0
+        new_data: List[Dict[str, Any]] = []
+        split_count: int = 0
 
         print(f"Scanning {len(data)} chunks for size (Threshold: {thresh} words)...")
 
         for item in data:
-            original_text = item.get("text_to_embed", "")
-            citation = item.get("metadata", {}).get("citation", "Unknown")
-            word_count = len(original_text.split())
+            original_text: str = item.get("text_to_embed", "")
+            citation: str = item.get("metadata", {}).get("citation", "Unknown")
+            word_count: int = len(original_text.split())
 
             if word_count <= thresh:
                 new_data.append(item)
-
             else:
                 split_count += 1
-                sub_texts = self.split_text_with_overlap(original_text)
+                sub_texts: List[str] = self.split_text_with_overlap(original_text)
 
                 for i, sub_text in enumerate(sub_texts):
-                    new_item = copy.deepcopy(item)
-
+                    new_item: Dict[str, Any] = copy.deepcopy(item)
                     new_item["chunk_id"] = f"{item['chunk_id']}_part_{i+1}"
 
                     if i > 0 and not sub_text.startswith(citation):

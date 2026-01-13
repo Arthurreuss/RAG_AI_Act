@@ -30,7 +30,3 @@ if __name__ == "__main__":
     small_chunks = chunker.process_chunks(structured_chunks)
     save_json(small_chunks, file_path_chunks_split)
     # small_chunks = load_json(file_path_chunks_split)
-
-# run create sentences
-# run create embeddings
-# run create vectorstore

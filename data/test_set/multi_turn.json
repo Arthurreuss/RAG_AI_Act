@@ -1,0 +1,2233 @@
+[
+    [
+        {
+            "turn_number": 1,
+            "question": "How does the Regulation align with the existing 'New Legislative Framework' and other Union laws?",
+            "ground_truth_answer": "The Regulation is designed to be consistent with the New Legislative Framework (specifically Regulation (EC) No 765/2008, Decision No 768/2008/EC, and Regulation (EU) 2019/1020). It applies across sectors but is complementary to, and applies without prejudice to, existing Union law regarding data protection, consumer protection, fundamental rights, employment, and product safety.",
+            "context_id": [
+                "recital_9_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* affect the rights of workers or national labour laws, such as the right to strike?",
+            "ground_truth_answer": "No, the Regulation does not affect Union law on social policy or national labour law concerning employment and working conditions. It specifically preserves the exercise of fundamental rights, including the right to strike, the right to negotiate and conclude collective agreements, and provisions regarding platform work.",
+            "context_id": [
+                "recital_9_part_2",
+                "recital_9_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *it* prevent Member States from enforcing their own laws to limit AI use for other specific public interests, like protecting minors?",
+            "ground_truth_answer": "No. The Regulation applies without prejudice to national laws that limit the use of certain AI systems if those laws fall outside the Regulation's scope or pursue other legitimate public interest objectives. For example, national labour law and laws on the protection of minors (persons below 18) are not affected.",
+            "context_id": [
+                "recital_9_part_3",
+                "recital_9_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the key characteristic that distinguishes an 'AI system' from simpler traditional software under this Regulation?",
+            "ground_truth_answer": "The key characteristic is the \"capability to infer.\" Unlike traditional software, which relies on rules defined solely by natural persons to automatically execute operations, AI systems use inference to derive models or algorithms from inputs or data. This allows them to generate outputs such as predictions, content, recommendations, or decisions.",
+            "context_id": [
+                "recital_12_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "What techniques enable *it* to perform this inference, and how is its autonomy defined?",
+            "ground_truth_answer": "Inference is enabled by machine learning approaches (which learn from data) and logic- and knowledge-based approaches (which infer from encoded knowledge or symbolic representations). Autonomy is defined as the system having some degree of independence of actions from human involvement and the capability to operate without human intervention.",
+            "context_id": [
+                "recital_12_part_2",
+                "recital_12_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Can *they* be physically built into other products, or must they always work on their own?",
+            "ground_truth_answer": "AI systems can be used as a component of a product, regardless of whether they are physically integrated (embedded) or serve the product's functionality without being integrated (non-embedded). They can also be used on a stand-alone basis.",
+            "context_id": [
+                "recital_12_part_3",
+                "recital_12_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "How is a 'publicly accessible space' defined under this Regulation?",
+            "ground_truth_answer": "A publicly accessible space is defined as any physical space accessible to an undetermined number of natural persons. This applies regardless of whether the space is publicly or privately owned and irrespective of its use (e.g., for commerce, transport, sport, entertainment, or leisure).",
+            "context_id": [
+                "recital_19_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* lose this classification if people have to buy a ticket or register to enter?",
+            "ground_truth_answer": "No. A space is still classified as publicly accessible even if access is subject to predetermined conditions, such as purchasing a ticket, prior registration, or having a certain age, provided these conditions can be fulfilled by an undetermined number of persons.",
+            "context_id": [
+                "recital_19_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are private workplaces, prisons, or online websites considered *such spaces*?",
+            "ground_truth_answer": "No. Spaces intended only for specific persons (like offices, factories, and workplaces for employees), as well as prisons and border control areas, are not considered publicly accessible. Online spaces are also explicitly excluded because they are not physical spaces.",
+            "context_id": [
+                "recital_19_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Does this Regulation apply to AI systems located outside the EU if they are not actually placed on the European market?",
+            "ground_truth_answer": "Yes, in certain cases. To prevent circumvention, the Regulation applies to providers and deployers established in a third country if the output produced by their AI systems is intended to be used in the Union. This covers scenarios where, for example, an operator in the Union contracts services to a third-country operator, data is transferred from the Union, processed abroad, and the resulting output is sent back to the Union.",
+            "context_id": [
+                "recital_22_part_1",
+                "recital_22_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Are there any exceptions for *those third-country entities* when they are working with law enforcement?",
+            "ground_truth_answer": "Yes. The Regulation does not apply to public authorities of a third country or international organizations when they are acting within the framework of international agreements for law enforcement and judicial cooperation with the Union or Member States. However, this exception applies only provided that the third country or organization offers adequate safeguards for fundamental rights and freedoms.",
+            "context_id": [
+                "recital_22_part_2",
+                "recital_22_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Who is responsible for checking if *these safeguards* are actually adequate?",
+            "ground_truth_answer": "The authorities competent for supervising law enforcement and judicial authorities under this Regulation are responsible for assessing whether those cooperation frameworks or international agreements include adequate safeguards for protecting fundamental rights.",
+            "context_id": [
+                "recital_22_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What are the seven non-binding ethical principles developed by the AI HLEG to ensure trustworthy AI?",
+            "ground_truth_answer": "The seven principles are: human agency and oversight; technical robustness and safety; privacy and data governance; transparency; diversity, non-discrimination and fairness; societal and environmental well-being; and accountability.",
+            "context_id": [
+                "recital_27_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "How do *they* define the principle of \"transparency\"?",
+            "ground_truth_answer": "Transparency is defined as developing and using AI systems in a way that allows for appropriate traceability and explainability. It also means making humans aware that they are communicating or interacting with an AI system and duly informing deployers and affected persons about the system's capabilities, limitations, and rights.",
+            "context_id": [
+                "recital_27_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "How are stakeholders encouraged to use *these principles* in practice?",
+            "ground_truth_answer": "Stakeholders—including industry, academia, civil society, and standardization organizations—are encouraged to use these principles to develop voluntary best practices and standards. Additionally, the principles should serve as a basis for drafting codes of conduct and be translated, where possible, into the design and use of AI models.",
+            "context_id": [
+                "recital_27_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What specific types of manipulative AI practices does this Regulation prohibit?",
+            "ground_truth_answer": "The Regulation prohibits AI systems that deploy subliminal components (such as audio, image, or video stimuli beyond human perception) or other deceptive techniques that subvert or impair a person's autonomy, decision-making, or free choice. These practices are banned if they have the objective or effect of materially distorting human behavior in a way that is likely to cause significant physical, psychological, or financial harm. This includes techniques facilitated by tools like machine-brain interfaces or virtual reality.",
+            "context_id": [
+                "recital_29_part_1",
+                "recital_29_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* also ban exploiting the vulnerabilities of specific groups?",
+            "ground_truth_answer": "Yes. The Regulation prohibits AI systems that exploit vulnerabilities of persons or specific groups due to their age, disability, or a specific social or economic situation (such as living in extreme poverty or belonging to ethnic or religious minorities), if this exploitation is likely to cause significant harm.",
+            "context_id": [
+                "recital_29_part_2",
+                "recital_29_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Do *these prohibitions* prevent legitimate medical treatments or standard advertising?",
+            "ground_truth_answer": "No. The prohibitions do not affect lawful medical practices, such as psychological treatment or physical rehabilitation, when carried out in accordance with medical standards and applicable law (e.g., with explicit consent). Similarly, common and legitimate commercial practices, such as advertising that complies with applicable law, are not in themselves considered harmful manipulative practices.",
+            "context_id": [
+                "recital_29_part_4",
+                "recital_29_part_5"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Who must authorize law enforcement's use of 'real-time' remote biometric identification in public spaces, and when should this usually happen?",
+            "ground_truth_answer": "Each use must be subject to express and specific authorisation by a judicial authority or by an independent administrative authority of a Member State whose decision is binding. In principle, this authorisation should be obtained prior to the use of the AI system.",
+            "context_id": [
+                "recital_35_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Are there exceptions where *this permission* can be requested later?",
+            "ground_truth_answer": "Yes, exceptions are allowed in duly justified situations of urgency where it is effectively impossible to obtain authorisation beforehand. In these cases, the use must be restricted to the absolute minimum necessary, and the authority must request authorisation without undue delay, at the latest within 24 hours, providing reasons for the delay.",
+            "context_id": [
+                "recital_35_part_1",
+                "recital_35_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "What happens if *that request* is rejected?",
+            "ground_truth_answer": "If the authorisation is rejected, the use of the system must cease immediately. Furthermore, all data related to such use, including directly acquired input data and any results or outputs, must be discarded and deleted.",
+            "context_id": [
+                "recital_35_part_2",
+                "recital_35_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the primary condition for placing high-risk AI systems on the Union market?",
+            "ground_truth_answer": "High-risk AI systems can only be placed on the market or put into service if they comply with certain mandatory requirements. These requirements are intended to ensure that the systems do not pose unacceptable risks to important Union public interests.",
+            "context_id": [
+                "recital_46_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "According to the 'Blue Guide' mentioned in the text, can *these systems* be subject to more than one set of rules?",
+            "ground_truth_answer": "Yes. The general rule is that more than one legal act of Union harmonisation legislation (such as regulations for medical devices or machinery) may be applicable to a single product. The product can only be made available when it complies with all applicable legislation.",
+            "context_id": [
+                "recital_46_part_1",
+                "recital_46_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "How does the text limit the definition of *such high-risk systems* to ensure the regulation is focused?",
+            "ground_truth_answer": "The text states that AI systems identified as high-risk should be limited to those that have a significant harmful impact on the health, safety, and fundamental rights of persons in the Union.",
+            "context_id": [
+                "recital_46_part_2"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Under what general circumstances might an AI system in a high-risk area be exempt from being classified as high-risk?",
+            "ground_truth_answer": "An AI system in a pre-defined high-risk area may be exempt if it does not lead to a significant risk of harm to the legal interests protected. Specifically, this applies if the system does not materially influence the outcome of decision-making, meaning it does not impact the substance (and thereby the outcome) of decision-making, whether human or automated.",
+            "context_id": [
+                "recital_53_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "What are some specific examples of tasks *it* might perform that would qualify for this lower-risk status?",
+            "ground_truth_answer": "Qualifying tasks include: 1) performing a narrow procedural task (e.g., transforming unstructured data into structured data or detecting duplicates); 2) improving the result of a previously completed human activity (e.g., improving language tone); 3) detecting decision-making patterns or deviations from prior human assessments (e.g., flagging grading inconsistencies) without replacing the human review; or 4) performing a task that is only preparatory to an assessment (e.g., smart file handling or translation).",
+            "context_id": [
+                "recital_53_part_2",
+                "recital_53_part_3",
+                "recital_53_part_4"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Can *this exemption* still apply if the system involves profiling individuals?",
+            "ground_truth_answer": "No. Even if the other conditions are met, an AI system is always considered to pose significant risks (and thus remains high-risk) if it implies profiling within the meaning of GDPR or other relevant data protection regulations.",
+            "context_id": [
+                "recital_53_part_5"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 4,
+            "question": "What must a provider do if they believe *their system* meets these conditions and is not high-risk?",
+            "ground_truth_answer": "The provider must draw up documentation of the assessment demonstrating that the system meets the non-high-risk conditions before placing it on the market. They must provide this documentation to national competent authorities upon request and must register the AI system in the EU database.",
+            "context_id": [
+                "recital_53_part_5",
+                "recital_53_part_6"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Why does the Regulation classify AI systems used to determine eligibility for essential public benefits as high-risk?",
+            "ground_truth_answer": "These systems are classified as high-risk because the natural persons applying for benefits (such as healthcare, social security, or housing assistance) are typically in a vulnerable position and dependent on these services. If an AI system determines whether to grant, deny, or reduce these benefits, it can have a significant impact on a person's livelihood and potentially infringe on fundamental rights like social protection, non-discrimination, and human dignity.",
+            "context_id": [
+                "recital_58_part_1",
+                "recital_58_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* also view systems that evaluate creditworthiness in the same way?",
+            "ground_truth_answer": "Yes, AI systems used to evaluate credit scores or creditworthiness are classified as high-risk because they determine access to financial resources and essential services like housing, electricity, and telecommunication. There is a specific concern that such systems may lead to discrimination or perpetuate historical patterns of discrimination based on factors like racial or ethnic origin, gender, or disability.",
+            "context_id": [
+                "recital_58_part_2",
+                "recital_58_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are there any financial AI systems that are excluded from *this high-risk category*?",
+            "ground_truth_answer": "Yes. AI systems used for detecting fraud in the offering of financial services (as provided for by Union law) and systems used for prudential purposes to calculate the capital requirements of credit institutions and insurance undertakings are not considered high-risk under this Regulation.",
+            "context_id": [
+                "recital_58_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 4,
+            "question": "What about *systems* used for emergency response, like dispatching ambulances?",
+            "ground_truth_answer": "AI systems used to evaluate and classify emergency calls, to dispatch or prioritize emergency first response services (including police, firefighters, and medical aid), and emergency healthcare patient triage systems are classified as high-risk. This is because they make decisions in critical situations that affect the life, health, and property of persons.",
+            "context_id": [
+                "recital_58_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Why is this Regulation necessary for products like machinery or medical devices that are already covered by existing EU safety laws?",
+            "ground_truth_answer": "It is necessary because existing sectoral laws (such as those for machinery or medical devices) may not address the specific risks posed by AI systems. Therefore, this Regulation complements the existing Union harmonisation legislation, requiring simultaneous application to ensure the product addresses all relevant hazards.",
+            "context_id": [
+                "recital_64_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "How can *providers* manage the administrative workload of complying with multiple sets of rules?",
+            "ground_truth_answer": "To avoid unnecessary burden and costs, providers are given flexibility to integrate the testing, reporting, and documentation required by this Regulation into the existing documentation and procedures they already maintain for other Union harmonisation legislation.",
+            "context_id": [
+                "recital_64_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *this flexibility* allow them to skip any specific obligations?",
+            "ground_truth_answer": "No. The ability to integrate processes does not in any way undermine the provider's obligation to comply with all applicable requirements.",
+            "context_id": [
+                "recital_64_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Why is the quality of data considered so critical for high-risk AI systems under this Regulation?",
+            "ground_truth_answer": "High-quality data is vital because it ensures the AI system performs as intended and safely, preventing it from becoming a source of discrimination. Specifically, data sets for training, validation, and testing must be relevant, sufficiently representative, and, to the best extent possible, free of errors and complete.",
+            "context_id": [
+                "recital_67_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific issues must *these data sets* address regarding bias?",
+            "ground_truth_answer": "Data sets must have appropriate statistical properties regarding the groups the system is intended for. Particular attention must be paid to mitigating possible biases—whether inherent in historical data or generated in real-world settings—that could affect health, safety, or fundamental rights, or lead to prohibited discrimination.",
+            "context_id": [
+                "recital_67_part_2",
+                "recital_67_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Can a provider use outside help to ensure *they* meet these strict data governance rules?",
+            "ground_truth_answer": "Yes. Providers can comply with data governance requirements by having recourse to third parties that offer certified compliance services. These services can include verification of data governance, data set integrity, and training, validation, and testing practices.",
+            "context_id": [
+                "recital_67_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Why is transparency required for high-risk AI systems before they are placed on the market?",
+            "ground_truth_answer": "Transparency is required to address concerns related to the opacity and complexity of these systems. It enables deployers to understand how the AI system works, evaluate its functionality, and comprehend its strengths and limitations, thereby helping them fulfill their obligations under the Regulation.",
+            "context_id": [
+                "recital_72_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific information must be included in the instructions of use to ensure *this transparency*?",
+            "ground_truth_answer": "The instructions must include the system's characteristics, capabilities, and performance limitations. They need to cover known and foreseeable circumstances (including deployer actions) where the system could pose risks to health, safety, or fundamental rights. Additionally, they must detail any pre-determined changes assessed for conformity and relevant human oversight measures.",
+            "context_id": [
+                "recital_72_part_1",
+                "recital_72_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "How should providers ensure *those documents* are accessible and easy to understand?",
+            "ground_truth_answer": "Providers should include illustrative examples, such as limitations and intended or precluded uses, to enhance legibility. The documentation must be meaningful, comprehensive, and tailored to the needs and foreseeable knowledge of the target deployers. Furthermore, the instructions must be made available in a language determined by the Member State to be easily understood by those deployers.",
+            "context_id": [
+                "recital_72_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Under what conditions would a distributor or importer be considered a 'provider' of a high-risk AI system?",
+            "ground_truth_answer": "A distributor, importer, deployer, or other third party is considered a provider if they put their name or trademark on a high-risk AI system already on the market, make a substantial modification to an existing high-risk AI system, or modify the intended purpose of an AI system (including a general-purpose one) such that it becomes a high-risk AI system.",
+            "context_id": [
+                "recital_84_part_1",
+                "recital_84_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "If *that party* effectively takes over the role of provider, does this override other existing EU product rules?",
+            "ground_truth_answer": "Not necessarily. These provisions apply without prejudice to more specific provisions in certain Union harmonisation legislation. For instance, specific rules in Regulation (EU) 2017/745 regarding medical devices—which define what changes do or do not affect compliance—continue to apply to high-risk AI systems that are medical devices.",
+            "context_id": [
+                "recital_84_part_2"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What technical metric is initially used to presume a general-purpose AI model poses systemic risks?",
+            "ground_truth_answer": "The initial metric used is the cumulative amount of computation used for the training of the general-purpose AI model, measured in floating point operations. This calculation includes computation across activities intended to enhance the model's capabilities prior to deployment, such as pre-training, synthetic data generation, and fine-tuning.",
+            "context_id": [
+                "recital_111_part_1",
+                "recital_111_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Can *this threshold* change over time?",
+            "ground_truth_answer": "Yes, it should be adjusted over time to reflect technological and industrial changes, such as algorithmic improvements or increased hardware efficiency. Additionally, it should be supplemented with benchmarks and indicators for model capability.",
+            "context_id": [
+                "recital_111_part_2",
+                "recital_111_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "What if a model doesn't meet *that limit* but still seems dangerous?",
+            "ground_truth_answer": "The Commission can take individual decisions to designate a general-purpose AI model as having systemic risk if it finds the model has capabilities or an impact equivalent to those captured by the set threshold. This decision is based on an overall assessment of criteria such as the quality or size of the training data set, the number of business and end users, its input and output modalities, its level of autonomy and scalability, or the tools it has access to.",
+            "context_id": [
+                "recital_111_part_3",
+                "recital_111_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "When must a provider notify the authorities if their general-purpose AI model meets the threshold for high-impact capabilities?",
+            "ground_truth_answer": "The provider is required to notify the AI Office at the latest two weeks after the requirements are met, or as soon as it becomes known that the model will meet the requirements that lead to the presumption of systemic risk.",
+            "context_id": [
+                "recital_112_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Can *they* argue that the model isn't risky even if it meets those requirements?",
+            "ground_truth_answer": "Yes, in the context of that notification, the provider can demonstrate that the model exceptionally does not present systemic risks due to its specific characteristics, and therefore should not be classified as a general-purpose AI model with systemic risks.",
+            "context_id": [
+                "recital_112_part_1",
+                "recital_112_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Why is this early engagement particularly crucial if *the system* is planned for open-source release?",
+            "ground_truth_answer": "It is especially important because, once an open-source model is released, it may be more difficult to implement the necessary measures to ensure compliance with the obligations under the Regulation.",
+            "context_id": [
+                "recital_112_part_2"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "How can providers utilize harmonised standards to satisfy the requirements of this Regulation?",
+            "ground_truth_answer": "Compliance with harmonised standards, which are expected to reflect the state of the art, is a means for providers to demonstrate that they conform to the requirements of the Regulation.",
+            "context_id": [
+                "recital_121_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "What alternative does the Commission have if *those standards* are missing, rejected, or insufficient regarding fundamental rights?",
+            "ground_truth_answer": "In the absence of relevant harmonised standards, or if they are rejected, delayed, or fail to address fundamental rights concerns, the Commission can establish \"common specifications\" via implementing acts. This serves as an exceptional fallback solution to facilitate compliance.",
+            "context_id": [
+                "recital_121_part_2",
+                "recital_121_part_3"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Who is the Commission encouraged to cooperate with when developing *these specifications*?",
+            "ground_truth_answer": "When developing common specifications, the Commission is encouraged to cooperate with international partners and international standardisation bodies.",
+            "context_id": [
+                "recital_121_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What requirement is placed on providers of AI systems that generate synthetic content to address the risks of misinformation and deepfakes?",
+            "ground_truth_answer": "Providers are required to embed technical solutions that enable marking in a machine-readable format and detection that the output has been generated or manipulated by an AI system and not a human. These solutions must be sufficiently reliable, interoperable, effective, and robust.",
+            "context_id": [
+                "recital_133_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific technical methods can *they* use to achieve this?",
+            "ground_truth_answer": "They can use techniques such as watermarks, metadata identifications, cryptographic methods for proving provenance and authenticity of content, logging methods, fingerprints, or a combination of these.",
+            "context_id": [
+                "recital_133_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are there any editing tools that are exempt from *this marking obligation*?",
+            "ground_truth_answer": "Yes, to remain proportionate, the obligation does not cover AI systems performing primarily an assistive function for standard editing or systems that do not substantially alter the input data provided by the deployer or its semantics.",
+            "context_id": [
+                "recital_133_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the specific obligation for Member States regarding the creation of controlled environments for AI experimentation?",
+            "ground_truth_answer": "Member States are required to ensure that their national competent authorities establish at least one AI regulatory sandbox at the national level. This is to facilitate the development and testing of innovative AI systems under strict regulatory oversight before they are placed on the market.",
+            "context_id": [
+                "recital_138"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Which specific types of businesses should *these sandboxes* prioritize for accessibility?",
+            "ground_truth_answer": "Particular attention should be given to their accessibility for SMEs, including start-ups, to help remove barriers and accelerate their access to markets.",
+            "context_id": [
+                "recital_139_part_1",
+                "recital_139_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "What happens if a significant risk is identified during testing inside *one of them*?",
+            "ground_truth_answer": "If significant risks are identified, it should result in adequate mitigation. If mitigation is not possible, the development and testing process must be suspended.",
+            "context_id": [
+                "recital_139_part_2",
+                "recital_139_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What priority access should Member States provide to SMEs and start-ups regarding regulatory experimentation?",
+            "ground_truth_answer": "Member States should provide SMEs and start-ups with priority access to AI regulatory sandboxes, provided they fulfill the eligibility conditions and selection criteria. This does not preclude other providers from accessing the sandboxes if they meet the same conditions.",
+            "context_id": [
+                "recital_143_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Besides sandbox access, how should *their* financial burden be eased regarding conformity assessments?",
+            "ground_truth_answer": "When notified bodies set conformity assessment fees, they should take into account the specific interests and needs of SMEs and start-ups. Additionally, the Commission is tasked with regularly assessing certification and compliance costs and working with Member States to lower them.",
+            "context_id": [
+                "recital_143_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "What practical resources should the Commission provide to assist *these operators* with the paperwork required by the Regulation?",
+            "ground_truth_answer": "To address their specific needs, the Commission should provide standardized templates for the areas covered by the Regulation (upon request of the Board). Furthermore, the Commission should provide a single information platform with easy-to-use information for all providers and deployers.",
+            "context_id": [
+                "recital_143_part_3",
+                "recital_143_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Who composes the Board established to facilitate the implementation of the Regulation, and what are their main advisory responsibilities?",
+            "ground_truth_answer": "The Board is composed of representatives of the Member States. Its main advisory responsibilities include issuing opinions, recommendations, and advice on matters related to the Regulation's implementation (such as enforcement, technical specifications, or standards) and providing advice to the Commission and national competent authorities on specific AI-related questions.",
+            "context_id": [
+                "recital_149_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific permanent sub-groups is *it* required to set up?",
+            "ground_truth_answer": "The Board is required to establish two standing sub-groups: one to provide a platform for cooperation among market surveillance authorities (acting as the administrative cooperation group or ADCO), and another for notifying authorities to exchange views on issues related to notified bodies.",
+            "context_id": [
+                "recital_149_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *the body* have the flexibility to form other groups if needed?",
+            "ground_truth_answer": "Yes, the Board may establish other standing or temporary sub-groups as appropriate for the purpose of examining specific issues.",
+            "context_id": [
+                "recital_149_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Which authorities are generally designated to supervise the implementation of the AI Regulation for regulated financial institutions?",
+            "ground_truth_answer": "The competent authorities responsible for the supervision and enforcement of Union financial services legal acts should generally be designated as the competent authorities for supervising the implementation of this Regulation, including for market surveillance activities.",
+            "context_id": [
+                "recital_158_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does this mean *they* have new powers to enforce these rules?",
+            "ground_truth_answer": "Yes, those competent authorities should have all powers under this Regulation and Regulation (EU) 2019/1020 to enforce requirements and obligations, including the power to carry out ex post market surveillance activities integrated into their existing supervisory mechanisms.",
+            "context_id": [
+                "recital_158_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are there any exceptions or special rules for *them* regarding quality management systems?",
+            "ground_truth_answer": "Yes, limited derogations should be envisaged in relation to the quality management system of providers and the monitoring obligation placed on deployers of high-risk AI systems to the extent that these apply to regulated credit institutions, insurance undertakings, and other financial institutions subject to internal governance requirements.",
+            "context_id": [
+                "recital_158_part_3",
+                "recital_158_part_4"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What mechanism are providers of non-high-risk AI systems encouraged to adopt to foster trustworthy AI?",
+            "ground_truth_answer": "Providers of non-high-risk AI systems are encouraged to create codes of conduct. These are intended to foster the voluntary application of some or all of the mandatory requirements applicable to high-risk AI systems, adapted to the lower risk involved.",
+            "context_id": [
+                "recital_165_part_1"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 2,
+            "question": "Beyond the standard requirements, what other ethical topics should *these codes* ideally address?",
+            "ground_truth_answer": "They should ideally address elements from the Union’s Ethics Guidelines for Trustworthy AI, environmental sustainability, AI literacy measures, and inclusive design (including accessibility for persons with disabilities). They should also encourage diversity in development teams, such as gender balance.",
+            "context_id": [
+                "recital_165_part_1",
+                "recital_165_part_2"
+            ],
+            "metadata_type": "recital"
+        },
+        {
+            "turn_number": 3,
+            "question": "How should *they* be structured to ensure they are actually effective?",
+            "ground_truth_answer": "To ensure effectiveness, they should be based on clear objectives and key performance indicators to measure the achievement of those objectives. Furthermore, they should be developed in an inclusive way involving relevant stakeholders like business, civil society, and academia.",
+            "context_id": [
+                "recital_165_part_2",
+                "recital_165_part_3"
+            ],
+            "metadata_type": "recital"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Does this Regulation apply to AI systems that are developed specifically for scientific research or to activities happening before a system is sold?",
+            "ground_truth_answer": "No. The Regulation does not apply to AI systems or models specifically developed and put into service for the sole purpose of scientific research and development. Furthermore, it does not apply to any research, testing, or development activity regarding AI systems or models prior to their being placed on the market or put into service.",
+            "context_id": [
+                "article_2_paragraph_6",
+                "article_2_paragraph_8"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does that exclusion for pre-market activity still apply if *they* undergo testing in real-world conditions?",
+            "ground_truth_answer": "No, the exclusion for research, testing, or development prior to being placed on the market does not cover testing in real-world conditions.",
+            "context_id": "article_2_paragraph_8",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "And how does *it* handle systems released under free and open-source licences?",
+            "ground_truth_answer": "The Regulation does not apply to AI systems released under free and open-source licences, unless they are placed on the market or put into service as high-risk AI systems, or if the system falls under Article 5 or 50.",
+            "context_id": "article_2_paragraph_12",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Is the use of real-time remote biometric identification systems allowed for law enforcement in public spaces?",
+            "ground_truth_answer": "Generally, the use of such systems is prohibited. However, it is permitted if strictly necessary for one of three specific objectives: the targeted search for specific victims (such as abduction or trafficking) or missing persons; the prevention of a specific, substantial, and imminent threat to life or safety, or a terrorist attack; or the identification of a person suspected of a criminal offence punishable by a custodial sentence of at least four years.",
+            "context_id": [
+                "article_5_paragraph_1_point_h",
+                "article_5_paragraph_1_point_h_point_i",
+                "article_5_paragraph_1_point_h_point_ii",
+                "article_5_paragraph_1_point_h_point_iii"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* require any specific permission before being deployed for those reasons?",
+            "ground_truth_answer": "Yes. Each use must be subject to a prior authorisation granted by a judicial authority or an independent administrative authority whose decision is binding in the Member State. This authorisation must be issued upon a reasoned request.",
+            "context_id": "article_5_paragraph_3_part_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "What happens if the situation is urgent and *they* cannot wait for that permission?",
+            "ground_truth_answer": "In duly justified situations of urgency, the use of the system may commence without authorisation, provided that the authorisation is requested without undue delay, at the latest within 24 hours. If the authorisation is subsequently rejected, the use must stop immediately, and all data, results, and outputs must be discarded and deleted.",
+            "context_id": [
+                "article_5_paragraph_3_part_1",
+                "article_5_paragraph_3_part_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "Can a decision having an adverse legal effect on a person be taken solely based on *its* output?",
+            "ground_truth_answer": "No, no decision that produces an adverse legal effect on a person may be taken based solely on the output of the ‘real-time’ remote biometric identification system.",
+            "context_id": "article_5_paragraph_3_part_3",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Under what conditions can an AI system listed in Annex III be exempt from being classified as high-risk?",
+            "ground_truth_answer": "An AI system listed in Annex III is not considered high-risk if it does not pose a significant risk of harm to health, safety, or fundamental rights, specifically if it meets one of the following conditions: it is intended to perform a narrow procedural task; it improves the result of a previously completed human activity; it detects decision-making patterns or deviations without replacing or influencing the prior human assessment without review; or it performs a preparatory task to an assessment. ",
+            "context_id": [
+                "article_6_paragraph_3",
+                "article_6_paragraph_3_point_a",
+                "article_6_paragraph_3_point_b",
+                "article_6_paragraph_3_point_c",
+                "article_6_paragraph_3_point_d"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does that exemption apply if *it* performs profiling of natural persons?",
+            "ground_truth_answer": "No. Notwithstanding the conditions for exemption, an AI system referred to in Annex III shall always be considered to be high-risk if the system performs profiling of natural persons.",
+            "context_id": "article_6_paragraph_3_paragraph_31",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "If a provider believes *their* system meets those exemption criteria, what must *they* do before selling it?",
+            "ground_truth_answer": "The provider must document their assessment that the system is not high-risk before placing it on the market or putting it into service. They are also subject to a registration obligation (as set out in Article 49(2)) and must provide the documentation of the assessment to national competent authorities upon request.",
+            "context_id": "article_6_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Can the Commission add new use-cases to the list of high-risk AI systems in Annex III?",
+            "ground_truth_answer": "Yes, the Commission is empowered to adopt delegated acts to add or modify use-cases in Annex III. This is permitted when the AI systems are intended for areas listed in Annex III and pose a risk of harm to health, safety, or fundamental rights that is equivalent to, or greater than, the risk posed by existing high-risk systems. ",
+            "context_id": [
+                "article_7_paragraph_1",
+                "article_7_paragraph_1_point_a",
+                "article_7_paragraph_1_point_b"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "When assessing *that* risk, how do *they* account for the vulnerability of the people involved?",
+            "ground_truth_answer": "The Commission must take into account the extent to which there is an imbalance of power, or if the potentially harmed persons are in a vulnerable position relative to the deployer (due to status, authority, knowledge, age, etc.). They also consider the extent to which persons are dependent on the AI's outcome and cannot reasonably opt-out for practical or legal reasons.",
+            "context_id": [
+                "article_7_paragraph_2_point_g",
+                "article_7_paragraph_2_point_h"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are *they* also allowed to remove systems from the list?",
+            "ground_truth_answer": "Yes, the Commission can remove high-risk AI systems from the list if two conditions are met: the system no longer poses significant risks to fundamental rights, health, or safety (based on the established criteria), and the deletion does not decrease the overall level of protection under Union law.",
+            "context_id": [
+                "article_7_paragraph_3",
+                "article_7_paragraph_3_point_a",
+                "article_7_paragraph_3_point_b"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What are the required steps for the risk management system of a high-risk AI model, and is it treated as a one-time event?",
+            "ground_truth_answer": "The risk management system is not a one-time event; it is a continuous, iterative process planned and run throughout the entire lifecycle of the system, requiring regular review. It must comprise the following steps: identifying and analyzing known and foreseeable risks; estimating and evaluating risks that may emerge from intended use or foreseeable misuse; evaluating other risks based on post-market monitoring data; and adopting appropriate targeted risk management measures. ",
+            "context_id": [
+                "article_9_paragraph_2",
+                "article_9_paragraph_2_point_a",
+                "article_9_paragraph_2_point_b",
+                "article_9_paragraph_2_point_c",
+                "article_9_paragraph_2_point_d"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "When selecting the measures to address *those risks*, is there a specific order of preference that must be followed?",
+            "ground_truth_answer": "Yes. The measures must ensure that residual risk is judged acceptable, and they must be identified in the following order: first, eliminate or reduce risks as far as technically feasible through design and development; second, implement mitigation and control measures for risks that cannot be eliminated; and third, provide information and training to deployers.",
+            "context_id": [
+                "article_9_paragraph_5",
+                "article_9_paragraph_5_point_a",
+                "article_9_paragraph_5_point_b",
+                "article_9_paragraph_5_point_c"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *it* require specific consideration for children or other specific groups during this implementation?",
+            "ground_truth_answer": "Yes, when implementing the risk management system, providers must specifically consider whether the high-risk AI system is likely to have an adverse impact on persons under the age of 18 and, as appropriate, other vulnerable groups.",
+            "context_id": "article_9_paragraph_9",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What specific quality criteria must the training, validation, and testing data sets meet for high-risk AI systems?",
+            "ground_truth_answer": "The data sets must be relevant, sufficiently representative, and, to the best extent possible, free of errors and complete in view of the intended purpose. Additionally, they must have appropriate statistical properties, particularly regarding the persons or groups on whom the system is intended to be used. ",
+            "context_id": "article_10_paragraph_3",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Are providers allowed to process special categories of personal data to ensure *those systems* do not contain bias?",
+            "ground_truth_answer": "Yes, but only exceptionally and if strictly necessary for bias detection and correction that cannot be achieved with other data (such as synthetic or anonymized data). This processing is subject to strict conditions: the data must be protected by state-of-the-art security (including pseudonymisation), must not be shared with other parties, and must be deleted once the bias is corrected or the retention period ends. ",
+            "context_id": [
+                "article_10_paragraph_5",
+                "article_10_paragraph_5_point_a",
+                "article_10_paragraph_5_point_b",
+                "article_10_paragraph_5_point_d",
+                "article_10_paragraph_5_point_e"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Do these governance rules still apply if *it* does not use techniques involving the training of models?",
+            "ground_truth_answer": "If the high-risk AI system does not use techniques involving the training of AI models, the data governance and management requirements (paragraphs 2 to 5) apply only to the testing data sets.",
+            "context_id": "article_10_paragraph_6",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What technical capability must high-risk AI systems possess regarding the recording of events?",
+            "ground_truth_answer": "High-risk AI systems must technically allow for the automatic recording of events (logs) throughout the lifetime of the system. ",
+            "context_id": "article_12_paragraph_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What is the intended purpose of *these capabilities*?",
+            "ground_truth_answer": "They are intended to ensure a level of traceability appropriate to the system's purpose. Specifically, they must enable the recording of events relevant for identifying risks (or substantial modifications), facilitating post-market monitoring, and monitoring the system's operation.",
+            "context_id": [
+                "article_12_paragraph_2",
+                "article_12_paragraph_2_point_a",
+                "article_12_paragraph_2_point_b",
+                "article_12_paragraph_2_point_c"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "For systems under point 1(a) of Annex III, what minimum information must *they* provide?",
+            "ground_truth_answer": "For these specific systems, the logging capabilities must provide, at a minimum: the start and end date and time of each use; the reference database against which input data was checked; the input data that led to a match; and the identification of the natural persons involved in verifying the results. ",
+            "context_id": [
+                "article_12_paragraph_3",
+                "article_12_paragraph_3_point_a",
+                "article_12_paragraph_3_point_b",
+                "article_12_paragraph_3_point_c",
+                "article_12_paragraph_3_point_d"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What are the transparency requirements for high-risk AI systems, and how should information be provided to the people using them?",
+            "ground_truth_answer": "High-risk AI systems must be designed to ensure sufficient transparency so that deployers can interpret the system’s output and use it appropriately. They must be accompanied by instructions for use, provided in an appropriate digital format or otherwise, which must contain concise, complete, correct, clear, relevant, accessible, and comprehensible information.",
+            "context_id": [
+                "article_13_paragraph_1",
+                "article_13_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific details regarding *their* performance and maintenance needs must be included in those instructions?",
+            "ground_truth_answer": "The instructions must detail the characteristics, capabilities, and limitations of performance, including the intended purpose, level of accuracy (with metrics), robustness, and cybersecurity. They must also specify the computational and hardware resources needed, the expected lifetime of the system, and any necessary maintenance measures, such as software updates.",
+            "context_id": [
+                "article_13_paragraph_3_point_b",
+                "article_13_paragraph_3_point_b_point_i",
+                "article_13_paragraph_3_point_b_point_ii",
+                "article_13_paragraph_3_point_e"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Do *they* also have to disclose risks that might arise if the system is misused?",
+            "ground_truth_answer": "Yes. The instructions must contain information on any known or foreseeable circumstances—whether used in accordance with the intended purpose or under conditions of reasonably foreseeable misuse—that may lead to risks to health, safety, or fundamental rights.",
+            "context_id": "article_13_paragraph_3_point_b_point_iii",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the primary objective of requiring human oversight for high-risk AI systems?",
+            "ground_truth_answer": "The primary objective of human oversight is to prevent or minimise risks to health, safety, or fundamental rights that may emerge when a high-risk AI system is used as intended or under conditions of reasonably foreseeable misuse. This is particularly important for addressing risks that persist even after other requirements of the Regulation have been applied. ",
+            "context_id": "article_14_paragraph_2",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "To achieve that, what specific capabilities must the people assigned to oversee *it* actually have?",
+            "ground_truth_answer": "Natural persons assigned to oversight must be enabled to: properly understand the system's capacities and limitations and monitor for anomalies; remain aware of automation bias (the tendency to over-rely on the system); correctly interpret the system's output; decide to disregard, override, or reverse the output; and intervene or interrupt the system, such as through a \"stop\" button. ",
+            "context_id": [
+                "article_14_paragraph_4_point_a",
+                "article_14_paragraph_4_point_b",
+                "article_14_paragraph_4_point_c",
+                "article_14_paragraph_4_point_d",
+                "article_14_paragraph_4_point_e"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are the rules stricter if *the system* is used for specific identification purposes, like those in Annex III point 1(a)?",
+            "ground_truth_answer": "Yes. For high-risk AI systems referred to in point 1(a) of Annex III, no action or decision based on an identification can be taken unless it has been separately verified and confirmed by at least two natural persons with the necessary competence, training, and authority. ",
+            "context_id": "article_14_paragraph_5",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "Does *that requirement* for dual verification apply in all cases?",
+            "ground_truth_answer": "No, the requirement for separate verification by two persons does not apply to systems used for law enforcement, migration, border control, or asylum if Union or national law considers the application of this requirement to be disproportionate.",
+            "context_id": "article_14_paragraph_5",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What contact information must providers display on their high-risk AI systems?",
+            "ground_truth_answer": "Providers must indicate their name, registered trade name or registered trade mark, and the address at which they can be contacted on the high-risk AI system.",
+            "context_id": "article_16_paragraph_1_point_b",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What should be done if *it* is not possible to put that details directly on the system?",
+            "ground_truth_answer": "Where it is not possible to indicate the information on the system itself, it must be indicated on its packaging or its accompanying documentation, as applicable.",
+            "context_id": "article_16_paragraph_1_point_b",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *that exception* regarding placement also apply to the CE marking?",
+            "ground_truth_answer": "Yes. Providers must affix the CE marking to the high-risk AI system, but where that is not possible, they must affix it on its packaging or its accompanying documentation.",
+            "context_id": "article_16_paragraph_1_point_h",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "Aside from labeling, do *they* have to ensure the system meets specific accessibility standards?",
+            "ground_truth_answer": "Yes, providers must ensure that the high-risk AI system complies with accessibility requirements in accordance with Directives (EU) 2016/2102 and (EU) 2019/882.",
+            "context_id": "article_16_paragraph_1_point_l",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Does the Regulation require providers to have a documented quality management system for high-risk AI models?",
+            "ground_truth_answer": "Yes. Providers of high-risk AI systems must put in place a quality management system that ensures compliance with the Regulation. This system must be documented in a systematic and orderly manner through written policies, procedures, and instructions. ",
+            "context_id": "article_17_paragraph_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What kind of data management procedures must *that system* actually include?",
+            "ground_truth_answer": "It must include systems and procedures for data management covering the entire data lifecycle. This specifically includes data acquisition, collection, analysis, labelling, storage, filtration, mining, aggregation, retention, and any other operation performed on the data before and for the purpose of placing the system on the market. ",
+            "context_id": "article_17_paragraph_1_point_f",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "If the provider is a small company, does *it* have to implement these aspects with the same complexity as a large corporation?",
+            "ground_truth_answer": "Not necessarily. The implementation of the quality management aspects should be proportionate to the size of the provider’s organisation. However, providers must always respect the degree of rigour and the level of protection required to ensure compliance with the Regulation.",
+            "context_id": "article_17_paragraph_2",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "How does this apply to financial institutions that already have governance rules under other laws?",
+            "ground_truth_answer": "For financial institutions subject to Union financial services law regarding internal governance, the obligation to put in place a quality management system is generally deemed fulfilled by complying with those existing rules. However, there are exceptions: they must still specifically comply with the risk management (Article 9), post-market monitoring (Article 72), and serious incident reporting (Article 73) requirements of this Regulation.",
+            "context_id": [
+                "article_17_paragraph_4_point_i",
+                "article_17_paragraph_1_point_g",
+                "article_17_paragraph_1_point_h",
+                "article_17_paragraph_1_point_i"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "If a provider of a high-risk AI system is based in a third country, what must they do before making their system available on the Union market?",
+            "ground_truth_answer": "Prior to making their high-risk AI systems available on the Union market, providers established in third countries must, by written mandate, appoint an authorised representative which is established in the Union. ",
+            "context_id": "article_22_paragraph_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific documentation is *that representative* required to keep available for authorities, and for how long?",
+            "ground_truth_answer": "The authorised representative must keep the following documents at the disposal of competent and national authorities: the contact details of the provider, a copy of the EU declaration of conformity, the technical documentation, and, if applicable, the certificate issued by the notified body. These must be retained for a period of 10 years after the high-risk AI system has been placed on the market or put into service. ",
+            "context_id": "article_22_paragraph_3_point_b",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "What must *they* do if *they* have reason to believe the provider is acting contrary to the Regulation?",
+            "ground_truth_answer": "If the authorised representative considers or has reason to consider the provider to be acting contrary to its obligations, they must terminate the mandate. In such a case, they must immediately inform the relevant market surveillance authority and, where applicable, the relevant notified body about the termination and the reasons for it.",
+            "context_id": "article_22_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What specific checks must an importer perform before placing a high-risk AI system on the market?",
+            "ground_truth_answer": "Before placing a high-risk AI system on the market, importers must verify that: the relevant conformity assessment procedure has been carried out by the provider; the provider has drawn up the technical documentation; the system bears the required CE marking and is accompanied by the EU declaration of conformity and instructions for use; and the provider has appointed an authorised representative.",
+            "context_id": [
+                "article_23_paragraph_1",
+                "article_23_paragraph_1_point_a",
+                "article_23_paragraph_1_point_b",
+                "article_23_paragraph_1_point_c",
+                "article_23_paragraph_1_point_d"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "If *they* find that the system is not in conformity or presents a risk, are *they* still allowed to sell it?",
+            "ground_truth_answer": "No. If an importer has sufficient reason to consider the system is not in conformity, falsified, or accompanied by falsified documentation, they shall not place it on the market until it has been brought into conformity. Furthermore, if the system presents a risk, the importer must inform the provider, the authorised representative, and the market surveillance authorities.",
+            "context_id": "article_23_paragraph_2",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Once the system is on the market, do *they* need to keep any records?",
+            "ground_truth_answer": "Yes. Importers must keep a copy of the certificate issued by the notified body (where applicable), the instructions for use, and the EU declaration of conformity for a period of 10 years after the high-risk AI system has been placed on the market or put into service.",
+            "context_id": "article_23_paragraph_5",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Under what circumstances would a distributor, importer, or other third party be legally considered the provider of a high-risk AI system?",
+            "ground_truth_answer": "A third party (such as a distributor, importer, or deployer) is considered the provider if they: put their name or trademark on a high-risk AI system already on the market (unless contractual arrangements say otherwise); make a substantial modification to an existing high-risk system; or modify the intended purpose of a system such that it becomes a high-risk AI system.",
+            "context_id": [
+                "article_25_paragraph_1",
+                "article_25_paragraph_1_point_a",
+                "article_25_paragraph_1_point_b",
+                "article_25_paragraph_1_point_c"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "In such cases, is the company that originally developed *it* still considered the responsible provider?",
+            "ground_truth_answer": "No, the initial provider is no longer considered the provider of that specific system. However, they are required to closely cooperate with the new provider and make available the necessary information and technical access to ensure compliance, unless they had clearly specified that the system was not to be changed into a high-risk AI system.",
+            "context_id": "article_25_paragraph_2",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Do *they* and the supplier of components for the system need to have a formal agreement regarding this technical access?",
+            "ground_truth_answer": "Yes. The provider and the third party supplying components, tools, or services must specify the necessary information, capabilities, and technical access in a written agreement to enable the provider to comply with the Regulation. This requirement does not apply to third parties providing tools under a free and open-source licence, unless they are general-purpose AI models.",
+            "context_id": "article_25_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What are the monitoring obligations for deployers of high-risk AI systems, and who must be notified if something goes wrong?",
+            "ground_truth_answer": "Deployers must monitor the operation of the high-risk AI system based on the instructions for use.  If they believe the system presents a risk (as defined in Article 79(1)), they must suspend its use and inform the provider or distributor and the relevant market surveillance authority without undue delay. In the case of a serious incident, they must immediately inform the provider first, followed by the importer or distributor and the market surveillance authorities.",
+            "context_id": "article_26_paragraph_5",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "For how long are *they* required to keep the logs generated by the system?",
+            "ground_truth_answer": "Deployers must keep the logs automatically generated by the high-risk AI system (if under their control) for a period appropriate to the intended purpose, but for at least six months, unless applicable Union or national law states otherwise.  However, financial institutions subject to specific internal governance laws must maintain logs as part of the documentation required by that financial service law.",
+            "context_id": "article_26_paragraph_6",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *it* require specific authorization if used for post-remote biometric identification by law enforcement?",
+            "ground_truth_answer": "Yes. The deployer must request an authorisation from a judicial or independent administrative authority, generally ex ante or within 48 hours, for the use of such a system.  This use must be strictly limited to investigating a specific criminal offence. If the authorisation is rejected, the use must stop immediately and the linked data must be deleted. Furthermore, the system cannot be used in an untargeted way without a link to a crime, threat, or missing person.",
+            "context_id": [
+                "article_26_paragraph_10_part_1",
+                "article_26_paragraph_10_part_2"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What entity must Member States set up to handle the assessment and monitoring of conformity assessment bodies?",
+            "ground_truth_answer": "Each Member State must designate or establish at least one notifying authority responsible for setting up and carrying out the procedures for the assessment, designation, notification, and monitoring of conformity assessment bodies.",
+            "context_id": "article_28_paragraph_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific expertise must the personnel working for *that authority* possess?",
+            "ground_truth_answer": "The notifying authority must have an adequate number of competent personnel with the necessary expertise in fields such as information technologies, AI, and law, including the supervision of fundamental rights.",
+            "context_id": "article_28_paragraph_7",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Is *it* permitted to offer commercial consultancy services?",
+            "ground_truth_answer": "No. Notifying authorities shall not offer or provide any activities that conformity assessment bodies perform, nor any consultancy services on a commercial or competitive basis.",
+            "context_id": "article_28_paragraph_5",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "To ensure they are fair, how independent must a notified body be from the companies whose AI systems they are evaluating?",
+            "ground_truth_answer": "They must be completely independent. Notified bodies (and their top-level management or personnel) cannot be directly involved in the design, development, marketing, or use of the high-risk AI systems they assess, nor represent parties involved in those activities.  They are also prohibited from engaging in any activity that might conflict with their independence or integrity, which specifically includes providing consultancy services.",
+            "context_id": [
+                "article_31_paragraph_4",
+                "article_31_paragraph_5"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* have to employ all the experts *itself*, or can *it* rely entirely on outside help?",
+            "ground_truth_answer": "While they can have tasks conducted by external parties, the notified body must have sufficient internal competences to effectively evaluate those tasks. They are required to have permanent availability of sufficient administrative, technical, legal, and scientific personnel who possess specific experience and knowledge regarding AI systems, data, and data computing.",
+            "context_id": "article_31_paragraph_11",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "And regarding financial responsibility, do *they* need to carry specific insurance?",
+            "ground_truth_answer": "Yes, they must take out appropriate liability insurance for their conformity assessment activities.  The only exception is if the liability is assumed by the Member State in which they are established, or if that Member State itself is directly responsible for the assessment.",
+            "context_id": "article_31_paragraph_9",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the procedure if a notified body decides to stop *its* conformity assessment activities?",
+            "ground_truth_answer": "If a notified body decides to cease its activities, it must inform the notifying authority and the affected providers as soon as possible. In the case of a planned cessation, this must be done at least one year in advance.  The certificates it issued may remain valid for nine months, provided another notified body confirms in writing that it will assume responsibility and completes a full assessment of the affected systems before issuing new certificates.",
+            "context_id": "article_36_paragraph_3",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What happens if the notifying authority finds that *it* is failing to fulfill *its* obligations?",
+            "ground_truth_answer": "If the notifying authority has reason to consider that the notified body no longer meets requirements or is failing its obligations, it must investigate without delay. It will inform the notified body of objections and allow it to respond. If the failure is confirmed, the authority will restrict, suspend, or withdraw the designation depending on the seriousness of the failure, and must immediately inform the Commission and other Member States. ",
+            "context_id": "article_36_paragraph_4",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "In the event of such a withdrawal, do the certificates *it* previously issued become invalid immediately?",
+            "ground_truth_answer": "Not necessarily. Unless they were unduly issued, the certificates can remain valid for a period of nine months if two conditions are met: the national competent authority confirms there is no risk to health, safety, or fundamental rights; and another notified body confirms in writing that it will assume immediate responsibility and complete its assessment within 12 months. ",
+            "context_id": [
+                "article_36_paragraph_9_point_a",
+                "article_36_paragraph_9_point_b"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "In what specific situations is the Commission allowed to step in and establish 'common specifications' for high-risk AI systems instead of relying on standardisation organisations?",
+            "ground_truth_answer": "The Commission may adopt common specifications if it has requested European standardisation organisations to draft a harmonised standard and specific conditions are met. These conditions include: the request is rejected or not accepted by any organisation; the standards are not delivered by the deadline; the standards do not comply with the request; or the standards insufficiently address fundamental rights concerns. Additionally, the Commission can act if no reference to a harmonised standard has been published in the Official Journal and none is expected within a reasonable period. ",
+            "context_id": [
+                "article_41_paragraph_1_point_a_point_i",
+                "article_41_paragraph_1_point_a_point_ii",
+                "article_41_paragraph_1_point_a_point_iii",
+                "article_41_paragraph_1_point_a_point_iv",
+                "article_41_paragraph_1_point_b"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "If a provider chooses to follow *these specifications*, does *it* simplify proving that their system follows the rules?",
+            "ground_truth_answer": "Yes. High-risk AI systems or general-purpose AI models that are in conformity with the common specifications (or parts of them) are presumed to be in conformity with the relevant requirements of the Regulation, to the extent that the specifications cover those requirements.",
+            "context_id": "article_41_paragraph_3",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are *they* mandatory, or can a provider opt to use a different technical solution?",
+            "ground_truth_answer": "They are not strictly mandatory. Providers can choose not to comply with the common specifications, but if they do so, they must duly justify that they have adopted technical solutions that meet the requirements to a level at least equivalent to the common specifications.",
+            "context_id": "article_41_paragraph_5",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "What happens to *them* if a harmonised standard is eventually adopted and published in the Official Journal?",
+            "ground_truth_answer": "If a reference to a harmonised standard is published in the Official Journal, the Commission must repeal the implementing acts (or the relevant parts) establishing the common specifications that cover the same requirements.",
+            "context_id": "article_41_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What information is a notified body required to report to the notifying authority regarding its assessment activities?",
+            "ground_truth_answer": "A notified body must inform the notifying authority of any Union technical documentation assessment certificates, supplements, and quality management system approvals it has issued. Additionally, it must report any refusals, restrictions, suspensions, or withdrawals of these certificates or approvals, as well as any circumstances affecting the scope or conditions of its notification and any requests received from market surveillance authorities. ",
+            "context_id": [
+                "article_45_paragraph_1_point_a",
+                "article_45_paragraph_1_point_b",
+                "article_45_paragraph_1_point_c",
+                "article_45_paragraph_1_point_d"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* also have to share information with other notified bodies?",
+            "ground_truth_answer": "Yes. It must inform other notified bodies about any quality management system approvals or certificates it has refused, withdrawn, suspended, or restricted. It must also provide relevant information on negative conformity assessment results to bodies performing similar activities. Information on issued approvals or positive results is shared upon request.",
+            "context_id": [
+                "article_45_paragraph_2_point_a",
+                "article_45_paragraph_2_point_b",
+                "article_45_paragraph_3"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "In doing so, is *it* required to protect the privacy of the data obtained?",
+            "ground_truth_answer": "Yes, notified bodies are required to safeguard the confidentiality of the information they obtain, in accordance with Article 78.",
+            "context_id": "article_45_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What document must a provider create to certify that a high-risk AI system meets the rules, and for how long must it be kept?",
+            "ground_truth_answer": "The provider must draw up a written EU declaration of conformity (which can be machine-readable, physical, or electronically signed) for each high-risk AI system. This document must be kept at the disposal of the national competent authorities for 10 years after the system has been placed on the market or put into service. ",
+            "context_id": "article_47_paragraph_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* need to be written in a specific language?",
+            "ground_truth_answer": "Yes, the EU declaration of conformity must be translated into a language that can be easily understood by the national competent authorities of the Member States in which the high-risk AI system is placed on the market or made available.",
+            "context_id": "article_47_paragraph_2",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "If the system is also subject to other EU laws that require a similar declaration, do *they* need to produce separate documents for each law?",
+            "ground_truth_answer": "No. If the high-risk AI system is subject to other Union harmonisation legislation that also requires an EU declaration of conformity, a single declaration shall be drawn up covering all applicable Union law.",
+            "context_id": "article_47_paragraph_3",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "By creating *this document*, what does the provider legally accept?",
+            "ground_truth_answer": "By drawing up the EU declaration of conformity, the provider assumes responsibility for compliance with the requirements set out in Section 2. They are also responsible for keeping the declaration up-to-date.",
+            "context_id": "article_47_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Who is responsible for registering high-risk AI systems in the EU database before they are used?",
+            "ground_truth_answer": "The provider or their authorised representative must register themselves and their system in the EU database before placing it on the market. Additionally, if the deployer is a public authority (or acting on their behalf), they must also register themselves, select the system, and register its use. ",
+            "context_id": [
+                "article_49_paragraph_1",
+                "article_49_paragraph_3"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *this process* differ if the system is used for sensitive purposes like law enforcement or migration?",
+            "ground_truth_answer": "Yes. For high-risk AI systems in the areas of law enforcement, migration, asylum, and border control management, the registration must be made in a secure non-public section of the EU database. Furthermore, it requires a limited set of information compared to other registrations.",
+            "context_id": [
+                "article_49_paragraph_4",
+                "article_49_paragraph_4_point_a",
+                "article_49_paragraph_4_point_b"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Who is authorized to access the data stored in *that restricted section*?",
+            "ground_truth_answer": "Only the Commission and specific national authorities (referred to in Article 74(8)) are permitted to have access to the respective restricted sections of the EU database.",
+            "context_id": "article_49_paragraph_4_paragraph_41",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What obligations do providers have regarding the marking of synthetic audio or video content generated by their systems?",
+            "ground_truth_answer": "Providers of AI systems generating synthetic audio, image, video, or text content must ensure that the outputs are marked in a machine-readable format and are detectable as artificially generated or manipulated. They must ensure their technical solutions are effective, interoperable, robust, and reliable. This obligation does not apply if the system performs only an assistive function for standard editing or does not substantially alter the input data.",
+            "context_id": "article_50_paragraph_2",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *that requirement* to disclose apply if the content is a deep fake used in a creative or artistic work?",
+            "ground_truth_answer": "Yes, but with limitations. If the deep fake content forms part of an evidently artistic, creative, satirical, fictional, or analogous work, the transparency obligations are limited to disclosing the existence of such content in an appropriate manner that does not hamper the display or enjoyment of the work.",
+            "context_id": "article_50_paragraph_4",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "When and how must *this information* be provided to the people exposed to it?",
+            "ground_truth_answer": "The information must be provided to the natural persons concerned in a clear and distinguishable manner at the latest at the time of the first interaction or exposure. Additionally, the information must conform to applicable accessibility requirements.",
+            "context_id": "article_50_paragraph_5",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "If a provider of a general-purpose AI model is based outside the EU, what must they do before selling their model in the Union?",
+            "ground_truth_answer": "Prior to placing a general-purpose AI model on the Union market, providers established in third countries must, by written mandate, appoint an authorised representative which is established in the Union.",
+            "context_id": "article_54_paragraph_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific documentation is *that representative* required to keep, and for how long?",
+            "ground_truth_answer": "The authorised representative must keep a copy of the technical documentation specified in Annex XI, as well as the contact details of the provider, at the disposal of the AI Office and national competent authorities. This documentation must be kept for a period of 10 years after the general-purpose AI model has been placed on the market.",
+            "context_id": "article_54_paragraph_3_point_b",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *this requirement* to appoint a representative apply if the model is released under an open-source licence?",
+            "ground_truth_answer": "Generally, no. The obligation does not apply if the model is released under a free and open-source licence that allows for access, usage, modification, and distribution, and whose parameters and architecture are publicly available. However, this exception does not apply if the general-purpose AI model presents systemic risks.",
+            "context_id": "article_54_paragraph_6",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What specific issues regarding systemic risks should the codes of practice for general-purpose AI models address?",
+            "ground_truth_answer": "The codes of practice should cover the identification of the type and nature of systemic risks at Union level, including their sources. They should also detail the measures, procedures, and modalities for the assessment and management of these risks (including documentation). These measures must be proportionate to the risks, taking into account their severity, probability, and the specific challenges of tackling them along the AI value chain.",
+            "context_id": [
+                "article_56_paragraph_2_point_c",
+                "article_56_paragraph_2_point_d"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Who is involved in drawing *them* up?",
+            "ground_truth_answer": "The AI Office facilitates the process and may invite all providers of general-purpose AI models and relevant national competent authorities to participate. Additionally, civil society organisations, industry, academia, and other relevant stakeholders (such as downstream providers and independent experts) may support the process.",
+            "context_id": [
+                "article_56_paragraph_1",
+                "article_56_paragraph_3"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "And what occurs if *they* are not ready by the established deadline?",
+            "ground_truth_answer": "The codes of practice should be ready by 2 May 2025. If a code cannot be finalised by 2 August 2025, or if the AI Office deems a code inadequate, the Commission may adopt implementing acts to provide common rules for implementing the relevant obligations.",
+            "context_id": "article_56_paragraph_9",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the deadline for Member States to set up AI regulatory sandboxes, and what is their primary purpose?",
+            "ground_truth_answer": "Member States must establish at least one AI regulatory sandbox at the national level (or jointly with others) by 2 August 2026.  These sandboxes are designed to provide a controlled environment that fosters innovation and facilitates the development, training, testing, and validation of innovative AI systems for a limited time before they are placed on the market or put into service.",
+            "context_id": [
+                "article_57_paragraph_1",
+                "article_57_paragraph_5"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "If a company participates in *one*, are *they* immune from liability for damages caused during testing?",
+            "ground_truth_answer": "No. Providers and prospective providers remain liable under applicable liability law for any damage inflicted on third parties.  However, provided they observe the specific plan and follow the guidance of the national competent authority in good faith, no administrative fines shall be imposed by the authorities for infringements of this Regulation.",
+            "context_id": "article_57_paragraph_12",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does the authority provide any documentation upon completion that helps *them* prove *they* followed the rules?",
+            "ground_truth_answer": "Yes. Upon request, the competent authority provides a written proof of activities and an exit report detailing the results and learning outcomes.  Providers can use this documentation to demonstrate compliance, and it must be taken positively into account by market surveillance authorities and notified bodies to accelerate conformity assessment procedures.",
+            "context_id": "article_57_paragraph_7",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Does the Regulation outline specific conditions for how small businesses, like startups, can access the AI regulatory sandboxes?",
+            "ground_truth_answer": "Yes. The implementing acts must ensure that access to AI regulatory sandboxes is free of charge for SMEs, including start-ups, though national competent authorities may recover exceptional costs in a fair and proportionate manner. Additionally, administrative requirements for application and participation must be simple, easily intelligible, and clearly communicated to facilitate their participation.",
+            "context_id": [
+                "article_58_paragraph_2_point_d",
+                "article_58_paragraph_2_point_g"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Are *they* also given access to any extra support services while in the sandbox?",
+            "ground_truth_answer": "Yes, prospective providers, particularly SMEs and start-ups, shall be directed to pre-deployment services (such as guidance on Regulation implementation) and other value-adding services like help with standardisation documents, certification, testing and experimentation facilities, and European Digital Innovation Hubs.",
+            "context_id": "article_58_paragraph_3",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "If *those providers* want to test *their* systems in real-world conditions within the sandbox, is that allowed?",
+            "ground_truth_answer": "Yes, national competent authorities can authorise testing in real-world conditions supervised within the sandbox framework. However, they must specifically agree on terms, conditions, and appropriate safeguards with the participants to protect fundamental rights, health, and safety.",
+            "context_id": "article_58_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What conditions must be met for a provider to test a high-risk AI system in real-world conditions outside of a regulatory sandbox?",
+            "ground_truth_answer": "Providers must meet several cumulative conditions, including: submitting a real-world testing plan to the market surveillance authority; obtaining approval (or tacit approval after 30 days); registering the testing in the EU database (with specific security measures for law enforcement systems); ensuring they are established in the Union (or have a representative); and ensuring effective oversight by qualified persons. ",
+            "context_id": [
+                "article_60_paragraph_4",
+                "article_60_paragraph_4_point_a",
+                "article_60_paragraph_4_point_b",
+                "article_60_paragraph_4_point_c",
+                "article_60_paragraph_4_point_d",
+                "article_60_paragraph_4_point_j"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Are there specific time limits imposed on *this testing*?",
+            "ground_truth_answer": "Yes. The testing must not last longer than necessary to achieve its objectives and, in any case, not longer than six months. This period may be extended for an additional six months, subject to prior notification and an explanation provided to the market surveillance authority.",
+            "context_id": "article_60_paragraph_4_point_f",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Do the people involved in *it* always have to give their permission?",
+            "ground_truth_answer": "Generally, yes, subjects must give informed consent. However, in the case of law enforcement, where seeking informed consent would prevent the system from being tested, it can proceed without consent provided that the testing and its outcome have no negative effect on the subjects and their personal data is deleted after the test is performed.",
+            "context_id": "article_60_paragraph_4_point_i",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "What happens if a serious incident occurs during *the process*?",
+            "ground_truth_answer": "Any serious incident must be reported to the national market surveillance authority. The provider must adopt immediate mitigation measures, or failing that, suspend or terminate the testing. They must also establish a procedure for the prompt recall of the AI system upon such termination. ",
+            "context_id": "article_60_paragraph_7",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Can very small companies follow simpler rules for their quality management systems under this Regulation?",
+            "ground_truth_answer": "Yes, microenterprises (as defined in Recommendation 2003/361/EC) may comply with certain elements of the required quality management system in a simplified manner. This applies provided they do not have partner enterprises or linked enterprises. The Commission is tasked with developing guidelines on which elements can be simplified without affecting the level of protection. ",
+            "context_id": "article_63_paragraph_1",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *this special treatment* mean *they* are excused from the other strict technical obligations, like risk management or data governance?",
+            "ground_truth_answer": "No. The simplified compliance for quality management does not exempt them from fulfilling any other requirements or obligations laid down in the Regulation. They must still comply with obligations such as risk management (Article 9), data governance (Article 10), and others listed in Articles 11 through 15, 72, and 73.",
+            "context_id": "article_63_paragraph_2",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Who sits on the European Artificial Intelligence Board, and does the AI Office have a voting role?",
+            "ground_truth_answer": "The Board is composed of one representative per Member State. The European Data Protection Supervisor participates as an observer. The AI Office attends the meetings to provide the secretariat, but it does not take part in the votes. ",
+            "context_id": [
+                "article_65_paragraph_2",
+                "article_65_paragraph_8"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "How long do *those representatives* serve, and what specific authority must *they* possess?",
+            "ground_truth_answer": "They are designated for a period of three years, renewable once. Member States must ensure that their representatives have relevant competences to contribute actively, are designated as a single contact point, and are empowered to facilitate consistency and coordination between national competent authorities.",
+            "context_id": [
+                "article_65_paragraph_3",
+                "article_65_paragraph_4_point_a",
+                "article_65_paragraph_4_point_b",
+                "article_65_paragraph_4_point_c"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *it* have any permanent sub-groups to help with specific issues like market surveillance?",
+            "ground_truth_answer": "Yes, the Board is required to establish two standing sub-groups: one for cooperation among market surveillance authorities (which acts as the administrative cooperation group or ADCO), and another for notifying authorities. It may also create other standing or temporary sub-groups for specific issues.",
+            "context_id": "article_65_paragraph_6",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Who selects the members of the advisory forum, and what kind of balance are they looking for?",
+            "ground_truth_answer": "The Commission appoints the members of the advisory forum. They must select stakeholders with recognised expertise in AI, ensuring a balanced representation of industry, start-ups, SMEs, civil society, and academia. The membership must also be balanced regarding commercial versus non-commercial interests, and within commercial interests, between SMEs and other undertakings. ",
+            "context_id": [
+                "article_67_paragraph_2",
+                "article_67_paragraph_3"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Are there any organizations that are guaranteed a spot on *it* permanently?",
+            "ground_truth_answer": "Yes, there are permanent members. These include the Fundamental Rights Agency, ENISA, the European Committee for Standardization (CEN), the European Committee for Electrotechnical Standardization (CENELEC), and the European Telecommunications Standards Institute (ETSI).",
+            "context_id": "article_67_paragraph_5",
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "How long do the regular members serve, and can *their* term be renewed?",
+            "ground_truth_answer": "The term of office for members is two years. This term may be extended, but by no more than four years.",
+            "context_id": "article_67_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Who serves on the 'scientific panel' for AI enforcement, and how are they chosen?",
+            "ground_truth_answer": "The scientific panel consists of independent experts selected by the Commission based on their up-to-date scientific or technical expertise in the field of AI.  To be selected, they must demonstrate particular expertise and competence in AI, independence from any AI system or model providers, and the ability to carry out their activities diligently, accurately, and objectively.",
+            "context_id": [
+                "article_68_paragraph_1",
+                "article_68_paragraph_2_point_a",
+                "article_68_paragraph_2_point_b",
+                "article_68_paragraph_2_point_c"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What are the main jobs of *this panel*?",
+            "ground_truth_answer": "The panel's primary role is to advise and support the AI Office, particularly regarding general-purpose AI models.  Their specific tasks include alerting the AI Office to possible systemic risks, contributing to the development of evaluation tools and benchmarks, advising on the classification of AI models, and supporting market surveillance authorities.",
+            "context_id": [
+                "article_68_paragraph_3_point_a_point_i",
+                "article_68_paragraph_3_point_a_point_ii",
+                "article_68_paragraph_3_point_a_point_iii",
+                "article_68_paragraph_3_point_b"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "How does the Regulation ensure *they* remain neutral and unbiased?",
+            "ground_truth_answer": "Experts on the scientific panel must perform their tasks with impartiality and objectivity and are strictly prohibited from seeking or taking instructions from anyone.  They must ensure the confidentiality of information obtained and are required to draw up a declaration of interests, which is made publicly available. The AI Office also establishes systems to actively manage and prevent potential conflicts of interest.",
+            "context_id": "article_68_paragraph_4",
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What information must market surveillance authorities report to the Commission on a yearly basis?",
+            "ground_truth_answer": "Annually, market surveillance authorities must report any information identified during their activities that might be of potential interest for applying Union competition law. Additionally, they must report on the use of prohibited practices that occurred during the year and the measures taken in response.",
+            "context_id": [
+                "article_74_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Who is responsible for *this surveillance* when it involves high-risk systems used by financial institutions?",
+            "ground_truth_answer": "For high-risk AI systems used by financial institutions regulated by Union financial services law, the market surveillance authority is typically the relevant national authority responsible for financial supervision. However, Member States may designate a different authority if coordination is ensured. If the authority supervises credit institutions under the Single Supervisory Mechanism, they must also report relevant information to the European Central Bank.",
+            "context_id": [
+                "article_74_paragraph_6",
+                "article_74_paragraph_7"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Under what conditions can *they* demand access to the source code of a system?",
+            "ground_truth_answer": "Market surveillance authorities can access the source code upon a reasoned request, but only if two specific conditions are met: 1) access is necessary to assess conformity with specific requirements (Chapter III, Section 2), and 2) other testing or auditing procedures based on provided data and documentation have been exhausted or proved insufficient.",
+            "context_id": [
+                "article_74_paragraph_13",
+                "article_74_paragraph_13_point_a",
+                "article_74_paragraph_13_point_b"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Which entities are required to maintain confidentiality under this Regulation, and what specific types of information must be protected?",
+            "ground_truth_answer": "The Commission, market surveillance authorities, notified bodies, and any other natural or legal person involved in applying the Regulation must respect confidentiality. Specifically, they must protect intellectual property rights and trade secrets (including source code), the effective implementation of the Regulation (such as inspections and audits), public and national security interests, the conduct of criminal or administrative proceedings, and information classified under Union or national law.",
+            "context_id": [
+                "article_78_paragraph_1",
+                "article_78_paragraph_1_point_a",
+                "article_78_paragraph_1_point_b",
+                "article_78_paragraph_1_point_c",
+                "article_78_paragraph_1_point_d",
+                "article_78_paragraph_1_point_e"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "How does the Regulation limit the data *they* can request, and what security measures are required?",
+            "ground_truth_answer": "These authorities must request only data that is strictly necessary for assessing the risk of AI systems and exercising their powers. Furthermore, they are required to implement adequate cybersecurity measures to protect the confidentiality of the obtained data and must delete the data as soon as it is no longer needed for its original purpose.",
+            "context_id": [
+                "article_78_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are there special rules for *their* information exchange regarding high-risk systems used by law enforcement?",
+            "ground_truth_answer": "Yes. When high-risk AI systems are used by law enforcement, border control, immigration, or asylum authorities, confidential information cannot be disclosed without prior consultation if it would jeopardize public or national security. The exchange must not include sensitive operational data. Additionally, if these authorities are the providers, the technical documentation must remain on their premises, and only staff with the appropriate security clearance may access it upon request.",
+            "context_id": [
+                "article_78_paragraph_3"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "How does the Regulation define an AI system that presents a risk?",
+            "ground_truth_answer": "An AI system is considered to present a risk if it meets the definition of a 'product presenting a risk' under Regulation (EU) 2019/1020, specifically insofar as it poses risks to the health, safety, or fundamental rights of persons.",
+            "context_id": [
+                "article_79_paragraph_1"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What happens if a market surveillance authority finds *such a system* is non-compliant during an evaluation?",
+            "ground_truth_answer": "If the evaluation reveals non-compliance, the authority must require the operator to take corrective actions to bring the system into compliance, withdraw it, or recall it without undue delay. This must happen within a prescribed period, typically no longer than 15 working days.",
+            "context_id": [
+                "article_79_paragraph_2_part_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "What if the operator fails to take *these corrective actions* in time?",
+            "ground_truth_answer": "If the operator does not act within the specified period, the market surveillance authority must take provisional measures to prohibit or restrict the system's availability, or withdraw/recall it from the national market. They must also notify the Commission and other Member States of these measures.",
+            "context_id": [
+                "article_79_paragraph_5"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "How long do other Member States or the Commission have to object to *those measures* before they are considered justified?",
+            "ground_truth_answer": "Generally, if no objection is raised within three months of the notification, the measure is deemed justified. However, if the non-compliance involves prohibited AI practices (Article 5), this period is reduced to 30 days.",
+            "context_id": [
+                "article_79_paragraph_8"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "When is a market surveillance authority required to evaluate an AI system that a provider has labeled as non-high-risk?",
+            "ground_truth_answer": "The authority must carry out an evaluation if they have sufficient reason to consider that the system, despite being classified as non-high-risk by the provider, is actually high-risk. This evaluation checks the classification against the conditions in Article 6(3) and Commission guidelines.",
+            "context_id": [
+                "article_80_paragraph_1"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What steps must *they* take if the system is found to be high-risk?",
+            "ground_truth_answer": "If the evaluation confirms the system is high-risk, the authority must require the provider to take all necessary actions to bring the system into compliance with the Regulation and perform appropriate corrective actions within a prescribed period.",
+            "context_id": [
+                "article_80_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "What penalties apply if *this misclassification* was done intentionally to avoid the rules?",
+            "ground_truth_answer": "If the authority establishes that the provider misclassified the system as non-high-risk specifically to circumvent the requirements of Chapter III, Section 2, the provider is subject to fines in accordance with Article 99.",
+            "context_id": [
+                "article_80_paragraph_7"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "And what happens if the provider fails to fix *the issue* within the set time?",
+            "ground_truth_answer": "If the provider does not bring the system into compliance within the prescribed period, they are subject to fines under Article 99. Furthermore, the procedures from Article 79(5) to (9) apply, which may involve prohibiting, restricting, or withdrawing the system from the market.",
+            "context_id": [
+                "article_80_paragraph_4",
+                "article_80_paragraph_6"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What specific administrative failures can trigger a market surveillance authority to demand a provider fix non-compliance?",
+            "ground_truth_answer": "Market surveillance authorities must require a provider to end non-compliance if they find issues such as: the CE marking is missing or affixed in violation of Article 48; the EU declaration of conformity is missing or incorrectly drawn up; the system is not registered in the EU database; an authorised representative has not been appointed where required; or technical documentation is unavailable.",
+            "context_id": [
+                "article_83_paragraph_1_point_a",
+                "article_83_paragraph_1_point_b",
+                "article_83_paragraph_1_point_c",
+                "article_83_paragraph_1_point_d",
+                "article_83_paragraph_1_point_e",
+                "article_83_paragraph_1_point_f",
+                "article_83_paragraph_1_point_g"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What actions must the authority take if *these administrative issues* persist?",
+            "ground_truth_answer": "If the non-compliance persists, the market surveillance authority must take appropriate and proportionate measures to restrict or prohibit the high-risk AI system from being made available on the market, or ensure it is recalled or withdrawn without delay.",
+            "context_id": [
+                "article_83_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Aside from enforcement, who does the Commission designate to support testing in *this area*?",
+            "ground_truth_answer": "The Commission designates one or more Union AI testing support structures to perform tasks related to AI testing (specifically those listed under Article 21(6) of Regulation (EU) 2019/1020).",
+            "context_id": [
+                "article_84_paragraph_1"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Under what specific circumstances can the AI Office conduct an evaluation of a general-purpose AI model?",
+            "ground_truth_answer": "The AI Office (after consulting the Board) may conduct evaluations in two main scenarios: first, to assess compliance if the information gathered under Article 91 is found to be insufficient; and second, to investigate systemic risks at the Union level, particularly following a qualified alert from the scientific panel.",
+            "context_id": [
+                "article_92_paragraph_1_point_a",
+                "article_92_paragraph_1_point_b"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Can *they* appoint outside help to perform *these evaluations*?",
+            "ground_truth_answer": "Yes, the Commission can appoint independent experts to carry out the evaluations on its behalf. These experts can be selected from the scientific panel established under Article 68 and must meet the criteria outlined in Article 68(2).",
+            "context_id": [
+                "article_92_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Before demanding full access to the model for *this purpose*, is there a preliminary step *the Office* might take?",
+            "ground_truth_answer": "Yes, prior to requesting access, the AI Office may initiate a structured dialogue with the provider. The goal of this dialogue is to gather information on internal testing, safeguards for preventing systemic risks, and other internal mitigation procedures.",
+            "context_id": [
+                "article_92_paragraph_7"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "If *they* do proceed to request access, what technical methods are permitted, and what must the request include?",
+            "ground_truth_answer": "The Commission may request access via APIs or other technical means, including source code. The request must explicitly state the legal basis, the purpose and reasons for the request, the deadline for providing access, and the fines applicable (under Article 101) for failure to comply.",
+            "context_id": [
+                "article_92_paragraph_3",
+                "article_92_paragraph_4"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What actions can the Commission request from providers of general-purpose AI models to ensure compliance or safety?",
+            "ground_truth_answer": "The Commission can request providers to take appropriate measures to comply with obligations under Articles 53 and 54. Additionally, if an evaluation under Article 92 reveals a serious systemic risk, the Commission can request mitigation measures, or even require the provider to restrict the model's availability, withdraw it, or recall it from the market.",
+            "context_id": [
+                "article_93_paragraph_1_point_a",
+                "article_93_paragraph_1_point_b",
+                "article_93_paragraph_1_point_c"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "Is there a preliminary process the AI Office might start before requesting *these measures*?",
+            "ground_truth_answer": "Yes, before requesting a measure, the AI Office may initiate a structured dialogue with the provider.",
+            "context_id": [
+                "article_93_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "What happens if the provider offers to fix *the issue* during that dialogue?",
+            "ground_truth_answer": "If the provider offers commitments to implement mitigation measures to address the systemic risk during the structured dialogue, the Commission can make those commitments binding by decision and declare that there are no further grounds for action.",
+            "context_id": [
+                "article_93_paragraph_3"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the primary goal of the voluntary codes of conduct described in Article 95?",
+            "ground_truth_answer": "The primary goal is to foster the voluntary application of specific requirements (particularly those from Chapter III, Section 2) to AI systems that are not classified as high-risk. Additionally, these codes aim to apply specific requirements to *all* AI systems based on clear objectives and key performance indicators (KPIs).",
+            "context_id": [
+                "article_95_paragraph_1",
+                "article_95_paragraph_2"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific themes or objectives should *these codes* include?",
+            "ground_truth_answer": "They should include elements such as adherence to Union ethical guidelines for trustworthy AI, assessing and minimizing environmental impact (like energy-efficient programming), promoting AI literacy, facilitating inclusive and diverse design (including diverse development teams), and preventing negative impacts on vulnerable groups (including accessibility for persons with disabilities and gender equality).",
+            "context_id": [
+                "article_95_paragraph_2_point_a",
+                "article_95_paragraph_2_point_b",
+                "article_95_paragraph_2_point_c",
+                "article_95_paragraph_2_point_d",
+                "article_95_paragraph_2_point_e"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Who is authorized to create *them*?",
+            "ground_truth_answer": "Codes of conduct may be drawn up by individual providers or deployers of AI systems, or by organizations representing them. This process can also involve interested stakeholders, such as civil society organizations and academia.",
+            "context_id": [
+                "article_95_paragraph_3"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the maximum financial penalty for violating the prohibition of AI practices under Article 5?",
+            "ground_truth_answer": "Non-compliance with the prohibition of AI practices referred to in Article 5 is subject to administrative fines of up to EUR 35,000,000. If the offender is an undertaking, the fine can be up to 7% of its total worldwide annual turnover for the preceding financial year, whichever is higher.",
+            "context_id": [
+                "article_99_paragraph_3"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What if *they* simply provide incorrect or misleading information to the authorities?",
+            "ground_truth_answer": "If an offender supplies incorrect, incomplete, or misleading information to notified bodies or national competent authorities in response to a request, they are subject to administrative fines of up to EUR 7,500,000 or up to 1% of their total worldwide annual turnover, whichever is higher.",
+            "context_id": [
+                "article_99_paragraph_5"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "Are there any exceptions to how *these fines* are calculated for small businesses?",
+            "ground_truth_answer": "Yes. In the case of SMEs and start-ups, the fines are calculated differently. Instead of the higher of the two values (fixed amount vs. percentage), the fine is capped at whichever of those amounts is *lower*.",
+            "context_id": [
+                "article_99_paragraph_6"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "When deciding the specific amount of *the penalty* in an individual case, what factors must be taken into account?",
+            "ground_truth_answer": "Authorities must consider all relevant circumstances, including the nature, gravity, and duration of the infringement, the operator's size and turnover, previous fines for the same activity, the level of cooperation with authorities, the intentional or negligent character of the infringement, and any actions taken to mitigate harm to affected persons.",
+            "context_id": [
+                "article_99_paragraph_7",
+                "article_99_paragraph_7_point_a",
+                "article_99_paragraph_7_point_b",
+                "article_99_paragraph_7_point_c",
+                "article_99_paragraph_7_point_d",
+                "article_99_paragraph_7_point_f",
+                "article_99_paragraph_7_point_i",
+                "article_99_paragraph_7_point_j"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What is the maximum fine the Commission can impose on providers of general-purpose AI models?",
+            "ground_truth_answer": "The Commission can impose fines of up to 3% of the provider's total worldwide annual turnover in the preceding financial year or EUR 15,000,000, whichever is higher.",
+            "context_id": [
+                "article_101_paragraph_1"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific actions by *the provider* would justify such a penalty?",
+            "ground_truth_answer": "These penalties apply if the Commission finds the provider intentionally or negligently committed specific acts: infringing relevant provisions of the Regulation, failing to comply with information or document requests (or providing misleading info), failing to comply with measures requested under Article 93, or failing to provide access to the model for evaluation under Article 92.",
+            "context_id": [
+                "article_101_paragraph_1_point_a",
+                "article_101_paragraph_1_point_b",
+                "article_101_paragraph_1_point_c",
+                "article_101_paragraph_1_point_d"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 3,
+            "question": "How does the Commission decide on the exact amount of *the fine*?",
+            "ground_truth_answer": "When fixing the amount, the Commission considers the nature, gravity, and duration of the infringement, ensuring proportionality and appropriateness. They also take into account any commitments the provider made under Article 93(3) or in relevant codes of practice.",
+            "context_id": [
+                "article_101_paragraph_1_paragraph_11"
+            ],
+            "metadata_type": "article"
+        },
+        {
+            "turn_number": 4,
+            "question": "Does *the provider* have any legal recourse to challenge the decision?",
+            "ground_truth_answer": "Yes, the Court of Justice of the European Union has unlimited jurisdiction to review the Commission's decision. The Court has the power to cancel, reduce, or even increase the fine imposed.",
+            "context_id": [
+                "article_101_paragraph_5"
+            ],
+            "metadata_type": "article"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Which regulation listed in Annex I establishes the European Union Aviation Safety Agency?",
+            "ground_truth_answer": "Regulation (EU) 2018/1139 of the European Parliament and of the Council of 4 July 2018 establishes the European Union Aviation Safety Agency.",
+            "context_id": [
+                "annex_i_item_1_section_point_20"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *it* apply to all aircraft in the context of this list?",
+            "ground_truth_answer": "No, in this context, it applies specifically insofar as the design, production, and placing on the market concern unmanned aircraft (drones) and their engines, propellers, parts, and equipment to control them remotely.",
+            "context_id": [
+                "annex_i_item_1_section_point_20"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 3,
+            "question": "Is there a separate regulation listed that deals specifically with *security* in the same field?",
+            "ground_truth_answer": "Yes, Regulation (EC) No 300/2008 covers common rules in the field of civil aviation security.",
+            "context_id": [
+                "annex_i_item_1_section_point_13"
+            ],
+            "metadata_type": "annex"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What information must be included in the general description of an AI system within the technical documentation?",
+            "ground_truth_answer": "The general description must include the system's intended purpose, provider name, and version details. It also requires descriptions of how the system interacts with other hardware or software (including other AI systems), the software/firmware versions and update requirements, the forms in which it is placed on the market (e.g., downloads, APIs), the hardware it runs on, and instructions for use and user-interface descriptions for the deployer.",
+            "context_id": [
+                "annex_iv_point_1_point_a",
+                "annex_iv_point_1_point_b",
+                "annex_iv_point_1_point_c",
+                "annex_iv_point_1_point_d",
+                "annex_iv_point_1_point_e",
+                "annex_iv_point_1_point_h"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 2,
+            "question": "Does *this documentation* need to detail the specific design choices and trade-offs made during development?",
+            "ground_truth_answer": "Yes. It must contain a detailed description of the design specifications, including the general logic and algorithms. This includes key design choices, rationale, assumptions (regarding intended users), main classification choices, what the system is designed to optimize for, and any trade-offs made regarding technical solutions adopted to comply with regulations.",
+            "context_id": [
+                "annex_iv_point_2_point_b"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 3,
+            "question": "How must *it* document the validation process, particularly regarding potential discrimination?",
+            "ground_truth_answer": "The documentation must describe the validation and testing procedures, including the data used and its characteristics. It specifically requires reporting the metrics used to measure accuracy, robustness, and potentially discriminatory impacts, alongside test logs and reports signed by responsible persons.",
+            "context_id": [
+                "annex_iv_point_2_point_g"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 4,
+            "question": "Does *the file* also need to cover what happens after the system is released?",
+            "ground_truth_answer": "Yes, the documentation must include a detailed description of the system in place to evaluate the AI system's performance in the post-market phase, specifically including the post-market monitoring plan.",
+            "context_id": [
+                "annex_iv_point_9"
+            ],
+            "metadata_type": "annex"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What basic identification information regarding the system and its source must be included in the EU declaration of conformity?",
+            "ground_truth_answer": "The declaration must include the AI system's name and type, along with any additional unambiguous reference that allows for its identification and traceability. It must also list the name and address of the provider or, where applicable, their authorised representative.",
+            "context_id": [
+                "annex_v_point_1",
+                "annex_v_point_2"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 2,
+            "question": "What formal legal statements must *this document* contain regarding the provider's responsibility?",
+            "ground_truth_answer": "It must contain a statement that the declaration is issued under the sole responsibility of the provider. Additionally, it must state that the AI system is in conformity with this Regulation and any other relevant Union law.",
+            "context_id": [
+                "annex_v_point_3",
+                "annex_v_point_4"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does *it* require any specific declarations if the system involves processing personal data?",
+            "ground_truth_answer": "Yes. If the AI system processes personal data, the declaration must explicitly state that the system complies with Regulations (EU) 2016/679 and (EU) 2018/1725, as well as Directive (EU) 2016/680.",
+            "context_id": [
+                "annex_v_point_5"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 4,
+            "question": "Finally, how should *the declaration* reference external standards or third-party assessments?",
+            "ground_truth_answer": "The declaration must reference any relevant harmonised standards or common specifications used. Furthermore, if applicable, it must include the name and identification number of the notified body, a description of the conformity assessment procedure performed, and the identification of the issued certificate.",
+            "context_id": [
+                "annex_v_point_6",
+                "annex_v_point_7"
+            ],
+            "metadata_type": "annex"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What must a provider submit to a notified body to apply for an assessment of their technical documentation?",
+            "ground_truth_answer": "To apply for an assessment, the provider must lodge an application with a notified body of their choice. This application must include the provider's name and address, a written declaration that the same application has not been lodged with any other notified body, and the technical documentation itself (as referred to in Annex IV).",
+            "context_id": [
+                "annex_vii_item_3_section_point_41",
+                "annex_vii_item_3_section_point_42_point_a",
+                "annex_vii_item_3_section_point_42_point_b",
+                "annex_vii_item_3_section_point_42_point_c"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 2,
+            "question": "During *this examination*, what can the notified body require if they are not satisfied with the provider's initial tests?",
+            "ground_truth_answer": "If the notified body is not satisfied with the tests carried out by the provider, they can require the provider to supply further evidence or perform additional tests. Furthermore, the notified body has the authority to directly carry out adequate tests itself to ensuring the system conforms to the requirements.",
+            "context_id": [
+                "annex_vii_item_3_section_point_44"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 3,
+            "question": "Under what specific conditions can *they* demand access to the actual trained models and parameters?",
+            "ground_truth_answer": "Access to the training and trained models (including relevant parameters) is granted only upon a reasoned request and when necessary to assess conformity with Chapter III, Section 2 requirements. Crucially, this is a measure of last resort: it is allowed only after all other reasonable means to verify conformity have been exhausted and proven insufficient.",
+            "context_id": [
+                "annex_vii_item_3_section_point_45"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 4,
+            "question": "If *the assessment* fails specifically due to the training data used, what steps must be taken?",
+            "ground_truth_answer": "If the system does not meet the requirements relating to the training data, the notified body will refuse to issue the certificate. In this specific case, the provider must re-train the AI system before applying for a new conformity assessment. The notified body's refusal decision will explicitly detail considerations regarding the quality of the data used.",
+            "context_id": [
+                "annex_vii_item_3_section_point_46_part_2"
+            ],
+            "metadata_type": "annex"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "Which parties must be identified when registering an AI system for testing in real world conditions?",
+            "ground_truth_answer": "The registration must provide the name and contact details of the provider (or prospective provider) as well as the deployers involved in the testing.",
+            "context_id": [
+                "annex_ix_point_2"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 2,
+            "question": "What specific identifiers and descriptions are required for *this testing*?",
+            "ground_truth_answer": "The registration requires a Union-wide unique single identification number for the testing. Additionally, it must include a brief description of the AI system, its intended purpose, and any other information necessary to identify the system.",
+            "context_id": [
+                "annex_ix_point_1",
+                "annex_ix_point_3"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does the registration need to cover the status or the plan of *the testing*?",
+            "ground_truth_answer": "Yes. It must include a summary of the main characteristics of the plan for testing in real world conditions. Furthermore, information regarding the suspension or termination of the testing must be provided.",
+            "context_id": [
+                "annex_ix_point_4",
+                "annex_ix_point_5"
+            ],
+            "metadata_type": "annex"
+        }
+    ],
+    [
+        {
+            "turn_number": 1,
+            "question": "What core technical specifications and intended use details must be included in the general description of a general-purpose AI model?",
+            "ground_truth_answer": "The general description must include the tasks the model is intended to perform, the type of AI systems it can be integrated into, its architecture, the number of parameters, and the modality (e.g., text, image) and format of its inputs and outputs. It must also include the date of release, methods of distribution, and the applicable license.",
+            "context_id": [
+                "annex_xii_point_1_point_a",
+                "annex_xii_point_1_point_c",
+                "annex_xii_point_1_point_f",
+                "annex_xii_point_1_point_g",
+                "annex_xii_point_1_point_h"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 2,
+            "question": "Beyond the model itself, what information must be provided regarding *its* integration with other systems?",
+            "ground_truth_answer": "The documentation must describe how the model interacts (or can interact) with external hardware or software that is not part of the model itself. It must also detail the technical means required for integration—such as instructions for use, infrastructure, and tools—and specify the versions of relevant software related to its use.",
+            "context_id": [
+                "annex_xii_point_1_point_d",
+                "annex_xii_point_1_point_e",
+                "annex_xii_point_2_point_a"
+            ],
+            "metadata_type": "annex"
+        },
+        {
+            "turn_number": 3,
+            "question": "Does the documentation need to disclose specific details about the data used to train *it*?",
+            "ground_truth_answer": "Yes. It must include information on the data used for training, testing, and validation, where applicable. This specifically includes the type and provenance of the data, as well as the curation methodologies used.",
+            "context_id": [
+                "annex_xii_point_2_point_c"
+            ],
+            "metadata_type": "annex"
+        }
+    ]
+]
