@@ -103,10 +103,8 @@ def delete_chat(chat_id: str, history_file: str) -> None:
         if st.session_state.current_chat_id == chat_id:
             remaining = list(st.session_state.all_chats.keys())
             if remaining:
-                # Note: Logic assumes switch_chat receives the bot elsewhere or here
                 st.session_state.current_chat_id = remaining[-1]
             else:
-                # Reset to default state
                 st.session_state.all_chats = {"New Chat": []}
                 st.session_state.current_chat_id = "New Chat"
 

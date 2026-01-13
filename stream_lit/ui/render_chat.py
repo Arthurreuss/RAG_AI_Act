@@ -74,13 +74,17 @@ def render_chat(cfg: Dict[str, Any], bot: Any) -> None:
                     )
                     if st.button("Save", key=f"save_{c_id}", type="primary"):
                         if new_name_input != c_id:
-                            rename_chat(c_id, new_name_input)
+                            rename_chat(
+                                c_id,
+                                new_name_input,
+                                cfg["streamlit"]["chat_history_file"],
+                            )
                         else:
                             st.warning("Name hasn't changed.")
 
             with col3:
                 if st.button("✖", key=f"del_{c_id}", help="Delete this chat"):
-                    delete_chat(c_id)
+                    delete_chat(c_id, cfg["streamlit"]["chat_history_file"])
                     st.rerun()
 
         st.markdown("---")

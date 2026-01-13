@@ -215,16 +215,22 @@ class RAGChatbot:
             role: str = "User" if turn["role"] == "user" else "Assistant"
             history_text += f"{role}: {turn['content']}\n"
 
-        prompt: str = f"""
-        <|begin_of_text|><|start_header_id|>system<|end_header_id|>
-        Rewrite the last user question to be standalone based on the history. Do not answer it. Just rewrite it.
+        prompt: str = f"""<|start_header_id|>system<|end_header_id|>
+        You are a query reformulator for a legal RAG system. 
+        Your task is to rewrite the 'Last Question' into a standalone, search-optimized query.
+
+        ### RULES:
+        1. Identify pronouns (it, they, this, that, those) and replace them with the specific legal Article, Recital, or Topic being discussed in the History.
+        2. If the 'Last Question' is already standalone, do not change it.
+        3. Maintain all legal citations (e.g., "Article 5") in the rewritten query.
+        4. Respond ONLY with the rewritten question. No preamble.
         <|eot_id|><|start_header_id|>user<|end_header_id|>
-        History:
+        ### HISTORY:
         {history_text}
         
-        Last Question: {user_query}
-        <|eot_id|><|start_header_id|>assistant<|end_header_id|>
-        """
+        ### LAST QUESTION: 
+        {user_query}
+        <|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
 
         output: Any = self.llm(
             prompt, max_tokens=128, stop=["<|eot_id|>"], temperature=0.0
@@ -356,7 +362,7 @@ class RAGChatbot:
         messages.extend(history_messages)
 
         final_user_content: str = (
-            f"### CONTEXT:\n{context_str}\n\n### QUESTION:\n{user_query}"
+            f"### CONTEXT:\n{context_str}\n\n### QUESTION:\n{search_query}"
         )
         messages.append({"role": "user", "content": final_user_content})
 
