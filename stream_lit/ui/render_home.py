@@ -15,7 +15,7 @@ def render_home() -> None:
         None: The function updates the Streamlit UI and may trigger a rerun.
     """
     try:
-        set_background("stream_lit/img/EU-AI-ACT.webp")
+        set_background("data/img/EU-AI-ACT.webp")
     except FileNotFoundError:
         pass
 
