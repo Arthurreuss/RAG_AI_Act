@@ -117,7 +117,7 @@ python -m scripts.run_rag.py
 #### Streamlit Web Application
 
 ```bash
-streamlit run -m stream_lit.app
+streamlit run stream_lit/app.py
 ```
 
 Access the web interface at `http://localhost:8501`
