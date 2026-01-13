@@ -100,7 +100,7 @@ This will:
 Generate embeddings and populate ChromaDB:
 
 ```bash
-python scripts/create_db.py
+python -m scripts.create_db.py
 ```
 
 This creates a persistent vector store in `data/chroma_db/` using the configured embedding model.
@@ -110,14 +110,14 @@ This creates a persistent vector store in `data/chroma_db/` using the configured
 #### Command Line Interface
 
 ```bash
-python scripts/run_rag.py
+python -m scripts.run_rag.py
 ```
 
 
 #### Streamlit Web Application
 
 ```bash
-streamlit run stream_lit/app.py
+streamlit run -m stream_lit.app
 ```
 
 Access the web interface at `http://localhost:8501`
@@ -133,7 +133,7 @@ Features:
 Run comprehensive evaluation on test sets:
 
 ```bash
-python scripts/evaluate_rag.py
+python -m scripts.evaluate_rag.py
 ```
 
 This will:
