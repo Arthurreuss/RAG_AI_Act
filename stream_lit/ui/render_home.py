@@ -1,12 +1,19 @@
-import base64
-
 import streamlit as st
 
 from stream_lit.utils import set_background
 
 
-def render_home():
+def render_home() -> None:
+    """Renders the landing page of the EU AI Act Legal Assistant application.
 
+    This function sets a custom background image, displays the application
+    capabilities, and provides a navigation button to enter the chat interface.
+    It manages the transition between the home page and the chat page using
+    Streamlit's session state.
+
+    Returns:
+        None: The function updates the Streamlit UI and may trigger a rerun.
+    """
     try:
         set_background("stream_lit/img/EU-AI-ACT.webp")
     except FileNotFoundError:

@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+from typing import Tuple
 
 import pandas as pd
 
@@ -9,11 +10,22 @@ from src.rag.rag_pipeline import RAGChatbot
 from src.utils.helper import load_config
 
 
-def save_results(df: pd.DataFrame, output_dir: str = "results"):
-    """
-    Saves evaluation results in two formats:
-    1. CSV: Numerical metrics only (clean for plotting).
-    2. JSON: EVERYTHING (Text + Numbers) for deep analysis.
+def save_results(df: pd.DataFrame, output_dir: str = "results") -> Tuple[str, str]:
+    """Saves evaluation results in CSV and JSON formats for analysis.
+
+    This function exports a subset of numerical metrics to a CSV for easy plotting
+    and a comprehensive JSON file containing the full dataset (text and scores)
+    for deep diagnostic analysis.
+
+    Args:
+        df (pd.DataFrame): The final evaluation DataFrame containing RAG scores,
+            baseline scores, and retrieval metrics.
+        output_dir (str): The directory where the resulting files will be stored.
+            Defaults to "results".
+
+    Returns:
+        Tuple[str, str]: A tuple containing the (csv_path, json_path) of the
+            saved files.
     """
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)

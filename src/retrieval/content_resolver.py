@@ -1,37 +1,64 @@
 import json
 import re
 from collections import Counter
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 
 class ContentResolver:
-    def __init__(self, full_data_path: str):
-        """
+    """A utility class to resolve granular text chunks back to their parent legal documents.
+
+    This class maintains an index of full legal documents (Articles, Recitals, Annexes)
+    and provides heuristics to map chunk identifiers back to their original source
+    structure for context retrieval.
+
+    Attributes:
+        full_docs_map (Dict[str, Dict[str, Any]]): A mapping of parent document IDs
+            to their full structured data.
+    """
+
+    def __init__(self, full_data_path: str) -> None:
+        """Initializes the ContentResolver by loading and indexing document data.
+
         Args:
-            full_data_path: Path to the JSON file containing full Articles/Recitals/Annexes
-                            (The one with "children" and full "text" fields)
+            full_data_path (str): Path to the JSON file containing full Articles,
+                Recitals, and Annexes with their hierarchical children.
         """
-        self.full_docs_map = self._load_and_index(full_data_path)
+        self.full_docs_map: Dict[str, Dict[str, Any]] = self._load_and_index(
+            full_data_path
+        )
         print(f"ContentResolver loaded {len(self.full_docs_map)} parent documents.")
 
-    def _load_and_index(self, path: str) -> Dict[str, Dict]:
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
+    def _load_and_index(self, path: str) -> Dict[str, Dict[str, Any]]:
+        """Loads JSON data and creates a lookup index based on document IDs.
 
-        index = {}
+        Args:
+            path (str): The file path to the source JSON.
+
+        Returns:
+            Dict[str, Dict[str, Any]]: A dictionary indexed by lowercase document IDs.
+        """
+        with open(path, "r", encoding="utf-8") as f:
+            data: List[Dict[str, Any]] = json.load(f)
+
+        index: Dict[str, Dict[str, Any]] = {}
         for item in data:
-            key = item.get("id", "").lower().strip()
+            key: str = item.get("id", "").lower().strip()
             if key:
                 index[key] = item
         return index
 
     def get_parent_id_from_chunk(self, chunk_id: str) -> Optional[str]:
+        """Extracts a parent document ID from a granular chunk ID using heuristics.
+
+        Args:
+            chunk_id (str): The identifier for a specific text chunk
+                (e.g., "article_5_paragraph_1").
+
+        Returns:
+            Optional[str]: The normalized parent ID (e.g., "art_5") if a match
+                is found, otherwise None.
         """
-        Heuristic to extract parent ID from chunk ID.
-        Example: "article_5_paragraph_1" -> "art_5"
-        Example: "recital_10" -> "rec_10"
-        """
-        cid = chunk_id.lower()
+        cid: str = chunk_id.lower()
 
         if "article" in cid:
             match = re.search(r"article_(\d+[a-z]?)", cid)
@@ -50,24 +77,33 @@ class ContentResolver:
 
         return None
 
-    def resolve_to_full_text(self, chunk_ids: List[str]) -> Dict:
-        """
-        Takes a list of chunk IDs and returns ONLY the full parent object
-        that appears most frequently among them (or the first one as fallback).
-        """
+    def resolve_to_full_text(self, chunk_ids: List[str]) -> Dict[str, Any]:
+        """Resolves a list of chunk IDs to the single most relevant parent document.
 
+        Calculates which parent document is most frequently referenced in the
+        provided list of chunks and returns that document's full data.
+
+        Args:
+            chunk_ids (List[str]): A list of chunk identifiers retrieved
+                during a search.
+
+        Returns:
+            Dict[str, Any]: The full data object for the most frequent parent
+                document. Returns an empty list (as per original logic) if
+                no valid parents are resolved.
+        """
         if not chunk_ids:
             return []
 
-        valid_parents = []
+        valid_parents: List[str] = []
         for cid in chunk_ids:
-            pid = self.get_parent_id_from_chunk(cid)
+            pid: Optional[str] = self.get_parent_id_from_chunk(cid)
             if pid and pid in self.full_docs_map:
                 valid_parents.append(pid)
 
         if not valid_parents:
             return []
 
-        most_common_pid = Counter(valid_parents).most_common(1)[0][0]
+        most_common_pid: str = Counter(valid_parents).most_common(1)[0][0]
 
         return self.full_docs_map[most_common_pid]

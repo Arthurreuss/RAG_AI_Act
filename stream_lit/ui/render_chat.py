@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 import streamlit as st
 
 from stream_lit.utils import (
@@ -10,7 +12,21 @@ from stream_lit.utils import (
 )
 
 
-def render_chat(cfg, bot):
+def render_chat(cfg: Dict[str, Any], bot: Any) -> None:
+    """Renders the primary Streamlit chat interface, including sidebar and message history.
+
+    This function manages the UI state for chat sessions, handles user input,
+    triggers the RAG bot response, and displays source citations with external links.
+
+    Args:
+        cfg (Dict[str, Any]): Configuration dictionary containing application settings
+            (e.g., file paths, model parameters).
+        bot (Any): An instance of the RAGChatbot class used to process queries
+            and retrieve context.
+
+    Returns:
+        None: The function updates the Streamlit interface directly via session state.
+    """
     with st.sidebar:
         st.header("Chat Sessions")
 
@@ -69,7 +85,7 @@ def render_chat(cfg, bot):
 
         st.markdown("---")
         st.header("Settings")
-        use_full_doc = st.toggle("Use Full Document Context", value=False)
+        use_full_doc: bool = st.toggle("Use Full Document Context", value=False)
 
     st.subheader(f"{st.session_state.current_chat_id}")
 
@@ -108,8 +124,11 @@ def render_chat(cfg, bot):
                             else:
                                 clean_id = bot._clean_source_id(sid)
                                 url_query = convert_citation_to_key(clean_id)
+
                             if url_query not in displayed:
-                                url = f"https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202401689#{url_query}"
+                                url = (
+                                    f"{cfg['preprocessing']['url_ai_act']}#{url_query}"
+                                )
                                 st.markdown(f"**[{clean_id}]** - [Link]({url})")
                                 displayed.add(url_query)
 
