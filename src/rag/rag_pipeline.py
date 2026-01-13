@@ -2,6 +2,7 @@ import re
 import textwrap
 from typing import Dict, List
 
+from flashrank import Ranker, RerankRequest
 from llama_cpp import Llama
 
 from src.retrieval.content_resolver import ContentResolver
@@ -21,6 +22,13 @@ class RAGChatbot:
 
         self.retriever = EmbeddingWithDB(cfg)
         self.retriever.load_model(cfg["rag_pipeline"]["embedding_model_name"])
+
+        self.ranker = Ranker(
+            model_name=cfg["rag_pipeline"].get(
+                "ranker_model", "ms-marco-MiniLM-L-12-v2"
+            ),
+            log_level="ERROR",
+        )
 
         self.content_resolver = ContentResolver(
             full_data_path=cfg["preprocessing"]["file_path_extracted"]
@@ -153,12 +161,45 @@ class RAGChatbot:
             print(f"Rewrote: '{user_query}' -> '{rewritten}'")
         return rewritten
 
+    def _rerank_items(self, query: str, items: List[Dict], top_k: int) -> List[Dict]:
+        """
+        Takes a list of retrieved chunks and reranks them using FlashRank.
+        """
+        if not items:
+            return []
+
+        passages = []
+        for item in items:
+            passages.append(
+                {
+                    "id": item.get("chunk_id", "unknown"),
+                    "text": item.get("text_to_embed", item.get("text", "")),
+                    "meta": item,
+                }
+            )
+
+        rank_request = RerankRequest(query=query, passages=passages)
+        results = self.ranker.rerank(rank_request)
+
+        reranked_items = [result["meta"] for result in results[:top_k]]
+
+        if self.verbose:
+            print(
+                f"Reranked {len(items)} candidates down to {len(reranked_items)} items."
+            )
+            for i, res in enumerate(results[:3]):
+                print(f"  [{i+1}] Score: {res['score']:.4f} - {res['id']}")
+
+        return reranked_items
+
     def chat(self, user_query: str, use_full_doc: bool = False):
         search_query = self._rewrite_query(user_query)
 
-        retrieved_items = self.retriever.search(
-            search_query, k=self.cfg["rag_pipeline"].get("retrieval_top_k", 5)
-        )
+        candidate_k = self.cfg["rag_pipeline"].get("rerank_candidate_k", 20)
+        candidates = self.retriever.search(search_query, k=candidate_k)
+
+        final_k = self.cfg["rag_pipeline"].get("retrieval_top_k", 5)
+        retrieved_items = self._rerank_items(search_query, candidates, top_k=final_k)
 
         if use_full_doc:
             chunk_ids = [c["chunk_id"] for c in retrieved_items]

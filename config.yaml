@@ -22,12 +22,14 @@ vector_store:
 rag_pipeline:
   embedding_model_name: snowflake-m
   llm_model: data/llm/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf #meta-llama/Meta-Llama-3.1-8B-Instruct
+  ranker_model: ms-marco-MiniLM-L-12-v2
   history_length: 6
   retrieval_top_k: 5
   generation_max_new_tokens: 512
   max_token_context: 8192
   generation_temperature: 0.1
   generation_top_p: 0.9
+  rerank_candidate_k: 20
 
 streamlit:
   chat_history_file: results/streamlit/chat_history.json

@@ -33,13 +33,15 @@ def save_results(df: pd.DataFrame, output_dir: str = "results"):
     df_metrics = df[metric_cols].copy()
     df_metrics.reset_index(names=["id"], inplace=True)
 
-    csv_filename = f"rag_eval_metrics_multi_turn_queries_{timestamp}.csv"
+    csv_filename = (
+        f"rag_eval_metrics_single_turn_queries_reranked_{timestamp}.csv"  # change
+    )
     csv_path = os.path.join(output_dir, csv_filename)
     df_metrics.to_csv(csv_path, index=False)
 
     records = df.to_dict(orient="records")
 
-    json_filename = f"rag_eval_full_multi_turn_{timestamp}.json"
+    json_filename = f"rag_eval_full_single_turn_reranked_{timestamp}.json"  # change
     json_path = os.path.join(output_dir, json_filename)
 
     with open(json_path, "w", encoding="utf-8") as f:
@@ -53,7 +55,7 @@ def save_results(df: pd.DataFrame, output_dir: str = "results"):
 
 if __name__ == "__main__":
     cfg = load_config("config.yaml")
-    test_path = cfg["test_set"]["multi_turn_path"]
+    test_path = cfg["test_set"]["single_turn_path"]  # change
 
     bot = RAGChatbot(cfg, verbose=False)
     evaluator = RAGEvaluator(bot, test_path)
