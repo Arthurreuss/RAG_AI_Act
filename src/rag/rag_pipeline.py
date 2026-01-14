@@ -216,19 +216,21 @@ class RAGChatbot:
             history_text += f"{role}: {turn['content']}\n"
 
         prompt: str = f"""<|start_header_id|>system<|end_header_id|>
-        You are a query reformulator for a legal RAG system. 
+        You are a query reformulator for a legal RAG system.
         Your task is to rewrite the 'Last Question' into a standalone, search-optimized query.
 
         ### RULES:
-        1. Identify pronouns (it, they, this, that, those) and replace them with the specific legal Article, Recital, or Topic being discussed in the History.
-        2. If the 'Last Question' is already standalone, do not change it.
-        3. Maintain all legal citations (e.g., "Article 5") in the rewritten query.
-        4. Respond ONLY with the rewritten question. No preamble.
+        1. **Resolution Only:** Identify ambiguous pronouns (e.g., "it", "they", "this", "the Regulation") and replace them with the specific legal entity or topic from the conversation history (e.g., replace "it" with "the EU AI Act").
+        2. **NO Hallucinated Citations:** Do NOT add new legal citations (like "Article 12", "Recital 9") unless the user explicitly mentioned them in the 'Last Question'.
+        3. **NO Answering:** Do NOT include the answer to the question in the query. Do not add "as stated in..." or "according to...".
+        4. **Preserve User Intent:** Keep the user's original question structure. Do not make the query more specific than the user intended.
+        5. Respond ONLY with the rewritten question. No preamble.
+
         <|eot_id|><|start_header_id|>user<|end_header_id|>
         ### HISTORY:
         {history_text}
-        
-        ### LAST QUESTION: 
+
+        ### LAST QUESTION:
         {user_query}
         <|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
 
@@ -299,15 +301,21 @@ class RAGChatbot:
         """
         search_query: str = self._rewrite_query(user_query)
 
-        candidate_k: int = self.cfg["rag_pipeline"].get("rerank_candidate_k", 20)
-        candidates: List[Dict[str, Any]] = self.retriever.search(
-            search_query, k=candidate_k
-        )
+        if self.cfg["rag_pipeline"].get("rerank", False):
+            candidate_k: int = self.cfg["rag_pipeline"].get("rerank_candidate_k", 20)
+            candidates: List[Dict[str, Any]] = self.retriever.search(
+                search_query, k=candidate_k
+            )
 
-        final_k: int = self.cfg["rag_pipeline"].get("retrieval_top_k", 5)
-        retrieved_items: List[Dict[str, Any]] = self._rerank_items(
-            search_query, candidates, top_k=final_k
-        )
+            final_k: int = self.cfg["rag_pipeline"].get("retrieval_top_k", 5)
+            retrieved_items: List[Dict[str, Any]] = self._rerank_items(
+                search_query, candidates, top_k=final_k
+            )
+        else:
+            k: int = self.cfg["rag_pipeline"].get("retrieval_top_k", 5)
+            retrieved_items: List[Dict[str, Any]] = self.retriever.search(
+                search_query, k=k
+            )
 
         full_doc: Optional[Dict[str, Any]] = None
         if use_full_doc:
