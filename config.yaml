@@ -23,6 +23,7 @@ rag_pipeline:
   embedding_model_name: snowflake-m
   llm_model: data/llm/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
   ranker_model: ms-marco-MiniLM-L-12-v2
+  rerank: True
   history_length: 6
   retrieval_top_k: 5
   generation_max_new_tokens: 512
